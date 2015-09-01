@@ -18,9 +18,9 @@ semVogais (x:xs)
 	| otherwise = x : semVogais xs
 
 --4
-translate :: [Float] -> [(Float, Float)]
+translate :: [(Float, Float)] -> [(Float, Float)]
 translate [] = []
-translate (x:xs) = (x, head xs) : translate (tail xs)
+translate ((x, y) : z) = (x + 2, y + 2) : translate z
 
 --5
 geraTabela :: Int -> [(Int, Int)]
