@@ -13,3 +13,7 @@ countShorts [] = 0
 countShorts (x:xs)
 	| length x < 5 = 1 + countShorts xs
 	| otherwise = countShorts xs
+
+--4
+countShorts' :: [String] -> Int
+countShorts' str = length [x | x <- str, length x < 5]
