@@ -17,3 +17,8 @@ countShorts (x:xs)
 --4
 countShorts' :: [String] -> Int
 countShorts' str = length [x | x <- str, length x < 5]
+
+--5
+ciclo :: Int -> [Int] -> [Int]
+ciclo 0 _ = []
+ciclo n list = list ++ ciclo (n - 1) list
