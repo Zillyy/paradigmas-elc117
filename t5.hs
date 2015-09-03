@@ -28,3 +28,11 @@ combine :: [Int] -> [String] -> [(Int, String)]
 combine [] _ = []
 combine _ [] = []
 combine (x:xs) (y:ys) = (x, y) : combine xs ys
+
+--7
+numera :: [String] -> [(Int, String)]
+numera list = numeraAux 1 list
+
+numeraAux :: Int -> [String] -> [(Int, String)]
+numeraAux _ [] = []
+numeraAux n (x:xs) = (n, x) : numeraAux (n + 1) xs
