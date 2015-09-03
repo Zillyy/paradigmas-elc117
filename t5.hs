@@ -22,3 +22,9 @@ countShorts' str = length [x | x <- str, length x < 5]
 ciclo :: Int -> [Int] -> [Int]
 ciclo 0 _ = []
 ciclo n list = list ++ ciclo (n - 1) list
+
+--6
+combine :: [Int] -> [String] -> [(Int, String)]
+combine [] _ = []
+combine _ [] = []
+combine (x:xs) (y:ys) = (x, y) : combine xs ys
