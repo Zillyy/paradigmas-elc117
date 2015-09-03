@@ -36,3 +36,10 @@ numera list = numeraAux 1 list
 numeraAux :: Int -> [String] -> [(Int, String)]
 numeraAux _ [] = []
 numeraAux n (x:xs) = (n, x) : numeraAux (n + 1) xs
+
+--8
+{-
+a) [(x, y) | x <- [1..5], even x, y <- [(x + 1)..6], odd y]
+b) [a ++ b | a <- ["lazy", "big"], b <- ["frog", "dog"]]
+c) concat [[a, '-'] | a <- "paralelepipedo", a `elem` "aeiou"]
+-}
