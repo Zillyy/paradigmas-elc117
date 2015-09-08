@@ -43,3 +43,12 @@ a) [(x, y) | x <- [1..5], even x, y <- [(x + 1)..6], odd y]
 b) [a ++ b | a <- ["lazy", "big"], b <- ["frog", "dog"]]
 c) concat [[a, '-'] | a <- "paralelepipedo", a `elem` "aeiou"]
 -}
+
+--9
+crossProduct :: [a] -> [b] -> [(a, b)]
+crossProduct [] _ = []
+crossProduct (x:xs) y = pairWithAll x y ++ crossProduct xs y 
+
+pairWithAll :: a -> [b] -> [(a, b)]
+pairWithAll _ [] = []
+pairWithAll a (b:bs) = (a, b) : pairWithAll a bs
