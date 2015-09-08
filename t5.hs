@@ -52,3 +52,9 @@ crossProduct (x:xs) y = pairWithAll x y ++ crossProduct xs y
 pairWithAll :: a -> [b] -> [(a, b)]
 pairWithAll _ [] = []
 pairWithAll a (b:bs) = (a, b) : pairWithAll a bs
+
+--10
+genRects :: Int -> (Int, Int) -> [(Float, Float, Float, Float)]
+
+--11
+decompTupla :: [(a, b)] -> ([a], [b]) 
