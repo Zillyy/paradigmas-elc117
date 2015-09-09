@@ -31,11 +31,11 @@ combine (x:xs) (y:ys) = (x, y) : combine xs ys
 
 --7
 numera :: [String] -> [(Int, String)]
-numera list = numeraAux 1 list
+numera list = numera' 1 list
 
-numeraAux :: Int -> [String] -> [(Int, String)]
-numeraAux _ [] = []
-numeraAux n (x:xs) = (n, x) : numeraAux (n + 1) xs
+numera' :: Int -> [String] -> [(Int, String)]
+numera' _ [] = []
+numera' n (x:xs) = (n, x) : numera' (n + 1) xs
 
 --8
 {-
@@ -55,6 +55,12 @@ pairWithAll a (b:bs) = (a, b) : pairWithAll a bs
 
 --10
 genRects :: Int -> (Int, Int) -> [(Float, Float, Float, Float)]
+genRects n (x, y) = genRects' 0 n ((realToFrac x), (realToFrac y))
+
+genRects' :: Int -> Int -> (Float, Float) -> [(Float, Float, Float, Float)]
+genRects' cont n (x, y)
+	| cont == n = []
+	| otherwise = (x, y, 5.5, 5.5) : genRects' (cont + 1) n (x + 5.5, y) 
 
 --11
-decompTupla :: [(a, b)] -> ([a], [b]) 
+--decompTupla :: [(a, b)] -> ([a], [b]) 
