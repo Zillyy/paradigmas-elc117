@@ -40,8 +40,15 @@ numera' n (x:xs) = (n, x) : numera' (n + 1) xs
 --8
 {-
 a) [(x, y) | x <- [1..5], even x, y <- [(x + 1)..6], odd y]
+Forma uma lista de tuplas onde o x deve ser par [1..5] e o y vai de
+(x + 1) até 6 e deve ser ímpar
+
 b) [a ++ b | a <- ["lazy", "big"], b <- ["frog", "dog"]]
+Forma uma lista com todas as combinações possíveis entre 
+a lista a e a lista b;
+
 c) concat [[a, '-'] | a <- "paralelepipedo", a `elem` "aeiou"]
+Concatena todas as vogais de "paralelepipedo" e as separa por "-"
 -}
 
 --9
