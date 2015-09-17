@@ -13,7 +13,7 @@ writeRect (style,((x,y),w,h)) =
 -- concatenando uma lista de retangulos e seus atributos de estilo
 writeRects :: Float -> Float -> [(String,Rect)] -> String 
 writeRects w h rs = 
-  printf "<svg width='%.2f' height='%.2f' xmlns='http://www.w3.org/2000/svg'>\n" w h 
+  printf "<svg width='%.2f' height='%.2f' style='background:gray' xmlns='http://www.w3.org/2000/svg'>\n" w h 
       ++ (concatMap writeRect rs) ++ "</svg>"
 
 {--
@@ -24,11 +24,16 @@ writeRects w h rs =
 main :: IO ()
 main = do
   let
-    style = "fill:rgb(140,0,0)"
-    --rects = [(style,((10,10),50,50)),(style,((70,10),50,50)),(style,((130,10),50,50))]
+    hue = "0"
+    saturation = "75%"
+    lighting = "50%"
+    color = "fill:hsl(" ++ hue ++ "," ++ saturation ++ "," ++ lighting ++ ")"
     xs = [10,65..230]
-    rects = [(style,((x,10),50,25)) | x <- xs]
-    (w,h) = (1000,1000)
-  writeFile "colors.svg" $ writeRects w h rects
+    ys = [10,40..160]
+    rectWidth = 50
+    rectHeight = 25
+    first = [(color,((x,y),rectWidth,rectHeight)) | x <- xs, y <- ys]
+    (w,h) = (head xs + last xs + rectWidth, head ys + last ys + rectHeight)
+  writeFile "colors.svg" $ writeRects (realToFrac w) (realToFrac h) first  
   -- o codigo acima eh equivalente a:
   -- writeFile "colors.svg" (writeRects w h rects)
