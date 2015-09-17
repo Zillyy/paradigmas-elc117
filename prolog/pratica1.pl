@@ -1,6 +1,7 @@
 % Exemplo de programa em Prolog que define
 % fatos e regras sobre pessoas e localizacoes geograficas.
 
+% Ex 1
 localizado_em(santa_maria, rs).
 localizado_em(salvador, bahia).
 localizado_em(rs, brasil).
@@ -23,3 +24,11 @@ gaucho(X) :- nasceu_em(X, rs).
 brasileiro(X) :- nasceu_em(X, brasil).
 europeu(X) :- nasceu_em(X, europa).
 
+% Ex 2
+nasceu_em(joana, salvador).
+nasceu_em(michel, paris).
+
+idade(joana, 22).
+idade(michel, 40).
+
+% Ex 3
