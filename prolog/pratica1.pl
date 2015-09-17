@@ -31,7 +31,11 @@ nasceu_em(michel, paris).
 idade(joana, 22).
 idade(michel, 40).
 
-% EX 4
+% Ex 4
 maisVelho(X, Y) :- idade(X, IdadeX),
 				 idade(Y, IdadeY),
 				 IdadeX > IdadeY.
+
+% Ex 5
+soma(A,B,C) :- C is A + B.
+pred(A,B,C) :- X is (A+B)^2, C is X*2+1.
