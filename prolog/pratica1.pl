@@ -31,4 +31,7 @@ nasceu_em(michel, paris).
 idade(joana, 22).
 idade(michel, 40).
 
-% Ex 3
+% EX 4
+maisVelho(X, Y) :- idade(X, IdadeX),
+				 idade(Y, IdadeY),
+				 IdadeX > IdadeY.
