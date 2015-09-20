@@ -16,24 +16,33 @@ writeRects w h rs =
   printf "<svg width='%.2f' height='%.2f' style='background:gray' xmlns='http://www.w3.org/2000/svg'>\n" w h 
       ++ (concatMap writeRect rs) ++ "</svg>"
 
-{--
-     O codigo+ abaixo cria um arquivo "colors.svg" com 2 retangulos.
-     Para simplificar o exemplo, todos os atributos sao definidos manualmente,
-     mas para gerar figuras maiores os atributos deverao ser calculados por funcoes.
- --}
 main :: IO ()
 main = do
   let
-    hue = "0"
-    saturation = "75%"
-    lighting = "50%"
-    color = "fill:hsl(" ++ hue ++ "," ++ saturation ++ "," ++ lighting ++ ")"
-    xs = [10,65..230]
-    ys = [10,40..160]
+    lineNumber = 5
+    columnNumber = 8
     rectWidth = 50
     rectHeight = 25
-    first = [(color,((x,y),rectWidth,rectHeight)) | x <- xs, y <- ys]
+    hue = "180"
+    
+    --Listas com os valores de sat e light
+    sat = [100.0, 100.0 - (100.0 / (columnNumber - 1))..0]
+    light = [100.0, 100.0 - (100.0 / (lineNumber - 1))..0]
+
+    --Forma uma lista de tuplas com os valores de sat e light
+    satLight = [(s, l) | s <- sat, l <- light]
+
+    --Forma uma lista de strings com os valores de hue, sat, light
+    colors = map(\sl -> "fill:hsl(" ++ hue ++ ", " ++ show(fst sl) ++ "%, " ++ show(snd sl) ++ "%)") satLight
+    
+    --Forma listas com valores de x e y
+    xs = if(columnNumber == 1) then [10] else if (columnNumber == 2) then [10,rectWidth + 15] else [10,rectWidth + 15..(columnNumber - 1) * (rectWidth + 5)]
+    ys = if(lineNumber == 1) then [10] else if (lineNumber == 2) then [10,rectHeight + 15] else [10,rectHeight + 15..(lineNumber - 1) * (rectHeight + 5)]
+    
+    --Concatena as strings de estilos estilos com as coordenadas x, y
+    hsl = zip colors [(((x,y),rectWidth,rectHeight)) | x <- xs, y <- ys]
+
+    --Define o tamanho do <svg>
     (w,h) = (head xs + last xs + rectWidth, head ys + last ys + rectHeight)
-  writeFile "colors.svg" $ writeRects (realToFrac w) (realToFrac h) first  
-  -- o codigo acima eh equivalente a:
-  -- writeFile "colors.svg" (writeRects w h rects)
+
+  writeFile "colors.svg" $ writeRects (realToFrac w) (realToFrac h) hsl 
