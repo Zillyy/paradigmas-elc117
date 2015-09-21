@@ -19,11 +19,11 @@ writeRects w h rs =
 main :: IO ()
 main = do
   let
-    lineNumber = 5
-    columnNumber = 8
+    lineNumber = 10
+    columnNumber = 10
     rectWidth = 50
     rectHeight = 25
-    hue = "180"
+    hue = "0"
     
     --Listas com os valores de sat e light
     sat = [100.0, 100.0 - (100.0 / (columnNumber - 1))..0]
