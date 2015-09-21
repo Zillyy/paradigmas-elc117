@@ -23,7 +23,7 @@ main = do
     columnNumber = 10
     rectWidth = 50
     rectHeight = 25
-    hue = "0"
+    hue = "10"
     
     --Listas com os valores de sat e light
     sat = [100.0, 100.0 - (100.0 / (columnNumber - 1))..0]
