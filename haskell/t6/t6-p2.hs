@@ -54,6 +54,7 @@ main = do
     rectHeight1 = 25
     hue1 = "0"
     
+    --String que contém os <rect>
     svg =  (writeRects (doMatrix lineNumber columnNumber rectWidth rectHeight hue xStart yStart)) ++ (writeRects (doMatrix lineNumber1 columnNumber1 rectWidth1 rectHeight1 hue1 xStart1 yStart1))
 
     --Define o tamanho do <svg>
