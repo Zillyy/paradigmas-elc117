@@ -39,7 +39,7 @@ main = do
     xs = if(columnNumber == 1) then [10] else if (columnNumber == 2) then [10,rectWidth + 15] else [10,rectWidth + 15..(columnNumber - 1) * (rectWidth + 5)]
     ys = if(lineNumber == 1) then [10] else if (lineNumber == 2) then [10,rectHeight + 15] else [10,rectHeight + 15..(lineNumber - 1) * (rectHeight + 5)]
     
-    --Concatena as strings de estilos estilos com as coordenadas x, y
+    --Concatena as strings de estilos com as coordenadas x, y
     hsl = zip colors [(((x,y),rectWidth,rectHeight)) | x <- xs, y <- ys]
 
     --Define o tamanho do <svg>

@@ -2,6 +2,7 @@ import Text.Printf
 
 type Point     = (Float,Float)
 type Rect      = (Point,Float,Float)
+type Circle    = (Point,Float)
 
 -- Gera retangulo SVG 
 -- a partir de coordenadas+dimensoes e de uma string com atributos de estilo
@@ -14,6 +15,14 @@ writeRect (style,((x,y),w,h)) =
 writeRects :: [(String,Rect)] -> String 
 writeRects rs = (concatMap writeRect rs) 
 
+-- Gera codigo para circulos svg 
+writeCircle :: (String,Circle) -> String 
+writeCircle (style,((x,y),radius)) = 
+  printf "<circle cx='%.2f' cy='%.2f' r='%.2f' style ='%s' />\n" x y radius style
+
+-- Passa um circulo por vez para a writeCircle
+writeCircles :: [(String,Circle)] -> String
+writeCircles circles = (concatMap writeCircle circles)
 
 doRectangle :: Float -> Float -> Float -> Float -> Float -> Float -> Float -> [(String,Rect)]
 doRectangle lineNumber columnNumber rectWidth rectHeight hue xStart yStart =
@@ -31,20 +40,33 @@ doRectangle lineNumber columnNumber rectWidth rectHeight hue xStart yStart =
     xs = if(columnNumber == 1) then [xStart] else if (columnNumber == 2) then [xStart, xStart + rectWidth + 15] else [xStart,xStart + rectWidth + 5..((columnNumber - 1) * (rectWidth + 5)) + xStart]
     ys = if(lineNumber == 1) then [yStart] else if (lineNumber == 2) then [yStart, xStart + rectHeight + 15] else [yStart,yStart + rectHeight + 5..((lineNumber - 1) * (rectHeight + 5)) + yStart]
     
-    --Concatena as strings de estilos com as coordenadas x, y
+    --Concatena as strings de estilos estilos com as coordenadas x, y
     rect = [(((x,y),rectWidth,rectHeight)) | x <- xs, y <- ys]
   in zip colors rect
+
+doCircles :: Float -> Float -> Float -> Float -> Float -> [(String,Circle)]
+doCircles x y radMax hue n = 
+  let
+    sat = [100, 100 - (100.0 / (n - 1))..0]
+    light = [100, 100 - (100.0 / (n - 1))..0]
+
+    satLight = [(s, l) | s <- sat, l <- light]
+
+    circ = [((x, y), radius) | radius <- [radMax, (radMax - 0.75).. 1] ]
+
+    colors = map(\sl -> "fill:hsl(" ++ show(hue) ++ "," ++ show(fst sl) ++ "%," ++ show(snd sl) ++ "%)") satLight      
+ in (zip colors circ)
 
 main :: IO ()
 main = do
   let
-    xStart = 10
+    {-xStart = 10
     yStart = 10
     lineNumber = 10
     columnNumber = 10
     rectWidth = 50
     rectHeight = 25
-    hue = 180
+    hue = "180"
 
     xStart1 = (rectWidth + 5) * columnNumber + 50
     yStart1 = 10
@@ -52,12 +74,17 @@ main = do
     columnNumber1 = 10
     rectWidth1 = 50
     rectHeight1 = 25
-    hue1 = 0
+    hue1 = "0"-}
     
     --String que contém os <rect>
-    svg = (writeRects (doRectangle lineNumber columnNumber rectWidth rectHeight hue xStart yStart)) ++ (writeRects (doRectangle lineNumber1 columnNumber1 rectWidth1 rectHeight1 hue1 xStart1 yStart1))
+    --svg = (writeRects (doRectangle lineNumber columnNumber rectWidth rectHeight hue xStart yStart)) ++ (writeRects (doRectangle lineNumber1 columnNumber1 rectWidth1 rectHeight1 hue1 xStart1 yStart1))
 
     --Define o tamanho do <svg>
-    (w,h) = (xStart1 + ((rectWidth1 + 5) * columnNumber1), yStart1 + ((rectWidth + 5) * lineNumber))
+    --(w,h) = (xStart1 + ((rectWidth1 + 5) * columnNumber1), yStart1 + ((rectWidth + 5) * lineNumber))
+
+    svg = (writeCircles (doCircles 350 350 200 150 50))
     
+    w = 350 + 200 :: Float
+    h = 350 + 200 :: Float
+
   writeFile "colors.svg" $ (printf "<svg width='%.2f' height='%.2f' style='background:gray' xmlns='http://www.w3.org/2000/svg'>\n" w h) ++ svg ++ "</svg>"
