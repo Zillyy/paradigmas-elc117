@@ -41,4 +41,14 @@ soma(A, B, C) :- C is A + B.
 pred(A, B, C) :- X is (A + B) ^ 2, C is X * 2 + 1.
 
 % Ex 6
-anoNasc(P, A)
+anoNasc(P, A) :- idade(P, I), A is 2015 - I.
+
+% Ex 7
+/*
+"member" verifica se o primeiro argumento pertence à lista;
+"length" retorna o número de elementos da lista passada ao segundo argumento;
+"nextto" verifica a lista e retorna o proximo elemento em relação àquele passado,
+ou true/false se forem passados possíveis vizinhos
+*/
+
+% Ex 8
