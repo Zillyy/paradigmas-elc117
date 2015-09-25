@@ -37,5 +37,8 @@ maisVelho(X, Y) :- idade(X, IdadeX),
 				 IdadeX > IdadeY.
 
 % Ex 5
-soma(A,B,C) :- C is A + B.
-pred(A,B,C) :- X is (A+B)^2, C is X*2+1.
+soma(A, B, C) :- C is A + B.
+pred(A, B, C) :- X is (A + B) ^ 2, C is X * 2 + 1.
+
+% Ex 6
+anoNasc(P, A)
