@@ -18,4 +18,9 @@ potenciasAux(C, N, [H|T]) :- H is 2 ^ C, N1 is N - 1, C1 is C + 1, potenciasAux(
 
 % Ex 5
 positivos([], []).
-positivos([H|T], [H1|T1]) :- (H > 0 -> H1 is H, positivos(T, T1); positivos(T, [H1|T1])).
+positivos([H|T], L) :- (H =< 0 -> positivos(T, L)).
+positivos([H|T], [H1|T1]) :- (H > 0 -> H1 is H, positivos(T, T1)).
+
+% Ex 6
+%mesmaPosicao(_, [], []).
+%mesmaPosicao(E, [H|T], [H1|T1]) :- 
