@@ -23,5 +23,6 @@ positivos([H|T], L) :- H =< 0, positivos(T, L).
 
 
 % Ex 6
-%mesmaPosicao(_, [], []).
-%mesmaPosicao(E, [H|T], [H1|T1]) :- 
+mesmaPosicao(E, [E], [E]).
+mesmaPosicao(E, [E|_], [E|_]).
+mesmaPosicao(E, [_|T1], [_|T2]) :- mesmaPosicao(E, T1, T2). 

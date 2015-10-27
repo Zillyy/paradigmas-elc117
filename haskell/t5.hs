@@ -70,17 +70,14 @@ genRects' cont n (x, y)
 	| otherwise = (x, y, 5.5, 5.5) : genRects' (cont + 1) n (x + 5.5, y) 
 
 --11
---decompTupla :: [(Int, Int)] -> ([Int], [Int])
---decompTupla [] = ([], [])
---decompTupla (x:xs) = ([fst x] ++ decompTupla xs, [snd x] ++ decompTupla xs) 
+decompTupla :: [(Int, Int)] -> ([Int], [Int])
+decompTupla [] = ([], [])
+decompTupla (x:xs) = ([fst x] ++ fst(decompTupla xs), [snd x] ++ snd(decompTupla xs)) 
 
+--12
+decompTupla2 :: [(Int, Int)] -> ([Int], [Int])
+decompTupla2 list = ([fst x | x <- list], [snd x | x <- list])
 
-{-
-11.Escreva uma função recursiva que receba uma lista de tuplas e
-decomponha cada uma delas, gerando uma tupla de listas, conforme o
-exemplo abaixo:
-> func [(1,3),(2,4)]
-([1,2], [3,4])
-12.Refaça o exercício anterior usando list comprehension.
-13.Refaça o exercício anterior usando uma função de alta ordem.
--}
+--13
+decompTupla3 :: [(Int, Int)] -> ([Int], [Int])
+decompTupla3 list = (map (fst) list, map (snd) list)
