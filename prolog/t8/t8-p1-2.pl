@@ -29,4 +29,4 @@ solucao(S) :-
 	member(comb(lia, _), S), member(comb(rute, _), S),
 	member(comb(N, _), S), N \= sara,
 	gera_sol(S).
-	
+
