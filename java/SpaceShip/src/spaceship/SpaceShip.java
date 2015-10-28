@@ -6,13 +6,15 @@ package spaceship;
  */
 class SpaceShip {
 
-    private int myX; // posicao X da espaconave
-    private int myY; // posicao Y da espaconave
+    private float myX; // posicao X da espaconave
+    private float myY; // posicao Y da espaconave
     private int myColor; // cor da espaconave
     private int myXmax; // posicao limite X da espaconave
     private int myYmax; // posicao limite Y da espaconave
-    private static final int defaultXmax = 600; // limite X, valor constante
-    private static final int defaultYmax = 300; // limite Y, valor constante
+    private float speedX; //velocidade em X
+    private float speedY; //velocidade em Y
+    private static final int defaultXmax = 400; // limite X, valor constante
+    private static final int defaultYmax = 400; // limite Y, valor constante
     public static final int defaultColor = 0xfffb7df4; // pink
     public String myName;
 
@@ -23,13 +25,15 @@ class SpaceShip {
         myXmax = defaultXmax;
         myYmax = defaultYmax;
         myName = "Enterprise";
+        speedX = (float) 1.2;
+        speedY = (float) 1.5;
     }
 
-    public int getX() {
+    public float getX() {
         return myX;
     }
 
-    public int getY() {
+    public float getY() {
         return myY;
     }
 
@@ -54,26 +58,41 @@ class SpaceShip {
         return myYmax;
     }
 
-    public void move() {
-        myX++;
-        myY++;
+    public void moveCollision() {
+        if(myX > myXmax) {if(speedX > 0) speedX *= -1;}
+        if(myY > myYmax) {if(speedY > 0) speedY *= -1;}
+        if(myX < 0) {if(speedX < 0) speedX *= -1;}
+        if(myY < 0) {if(speedY < 0) speedY *= -1;}
+        
+        
+        move(speedX, speedY);
+    }
+
+    public void move(float incX, float incY) {
+        myX += incX;
+        myY += incY;
     }
 
     public void print() {
-        System.out.printf("Spaceship at (%d,%d), color: %x, name: %s\n", myX, myY, myColor, myName);
+        System.out.printf("Spaceship at (%g,%g), color: %x, name: %s\n", myX, myY, myColor, myName);
     }
 
 }
 
-class SpaceShipTest {
+/*class SpaceShipTest {
 
-    public static void main(String[] args) {
-        SpaceShip sr;
-        SpaceShip ship = new SpaceShip(20, 20);
-        ship.print();
-        ship.move();
-        ship.print();
-        ship.setColor(0xffff0000);
-        ship.print();
-    }
-}
+ public static void main(String[] args) {
+ SpaceShip ship2 = new SpaceShip(100, 100);
+ //SpaceShip ship = new SpaceShip(20, 20);
+ //ship.print();
+ ship2.print();
+ //ship.move();
+ ship2.move();
+ //ship.print();
+ ship2.print();
+ //ship.setColor(0xffff0000);
+ ship2.setColor(0xffff0000);
+ //ship.print();
+ ship2.print();
+ }
+ }*/

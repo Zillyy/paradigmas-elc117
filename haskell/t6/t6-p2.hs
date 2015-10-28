@@ -50,7 +50,7 @@ main = do
     yStart1 = 10
     lineNumber1 = 10
     columnNumber1 = 10
-    rectWidth1 = 50
+    rectWidth1 = 75
     rectHeight1 = 25
     hue1 = 0
     

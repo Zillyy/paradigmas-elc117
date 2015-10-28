@@ -14,18 +14,20 @@ import javax.swing.*;
 
 /**
  * Interface grafica de animacao de uma espaconave.
+ *
  * @author andrea
  */
 class SpaceShipGUI {
-    
+
     public static void main(String[] args) {
 
-        SpaceShip ship = new SpaceShip(0, 0);
+        SpaceShip ship = new SpaceShip(50, 100);
+        ship.setLimits(400, 400);
         SpaceShipAnim anim = new SpaceShipAnim(ship);
         showGUI(anim);
 
     }
-    
+
     private static void showGUI(SpaceShipAnim anim) {
         JFrame f = new JFrame("Animation");
 
@@ -61,7 +63,7 @@ class SpaceShipView {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(img, ship.getX(), ship.getY(), null);
+        g.drawImage(img, ((int) ship.getX()), ((int) ship.getY()), null);
     }
 
     // Altera a cor do SpaceShip, pixel por pixel
@@ -101,7 +103,8 @@ class SpaceShipAnim extends Component {
     // Animacao: loop que move e redesenha a espaconave
     public void run() {
         while (true) {
-            ship.move();
+            ship.moveCollision();
+            ship.print();
             repaint();
             try {
                 Thread.sleep(30); // pausa
@@ -111,4 +114,3 @@ class SpaceShipAnim extends Component {
         }
     }
 }
-
