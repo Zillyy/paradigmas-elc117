@@ -161,23 +161,28 @@ public class Form extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDesabilitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesabilitaActionPerformed
-        // TODO: COMPLETE-ME
+        jButtonInsere.setEnabled(false);
+        jButtonLabel.setEnabled(false);
+        jButtonDesabilita.setEnabled(false);
     }//GEN-LAST:event_jButtonDesabilitaActionPerformed
 
     private void jButtonHabilitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHabilitaActionPerformed
-        // TODO: COMPLETE-ME
+        jButtonInsere.setEnabled(true);
+        jButtonLabel.setEnabled(true);
+        jButtonDesabilita.setEnabled(true);
     }//GEN-LAST:event_jButtonHabilitaActionPerformed
 
     private void jButtonLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLabelActionPerformed
-        // TODO: COMPLETE-ME
+        jButtonLabel.setText(jTextField1.getText());
     }//GEN-LAST:event_jButtonLabelActionPerformed
 
     private void jButtonRetornarPadraoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetornarPadraoActionPerformed
-        
+        jTextArea1.setText("");
+        jTextField1.setText("Digite algo aqui");
     }//GEN-LAST:event_jButtonRetornarPadraoActionPerformed
 
     private void jButtonInsereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsereActionPerformed
-        // TODO: COMPLETE-ME
+        jTextArea1.setText(jTextArea1.getText() + jTextField1.getText());
     }//GEN-LAST:event_jButtonInsereActionPerformed
 
     /**
