@@ -20,7 +20,10 @@ public class TableModelVeiculo extends AbstractTableModel  {
     */
    public TableModelVeiculo() {
       veiculos = new ArrayList <> ();
-      // COMPLETE-ME: inicialize a lista com alguns veículos!
+      Veiculo v1 = new Veiculo("ABC1234", "Branco", "Renault", "Clio", 2010, 26050f);
+      Veiculo v2 = new Veiculo("DEF5678", "Vermelho", "Toyota", "Corolla", 2012, 66300f);
+      Veiculo v3 = new Veiculo("GHI1020", "Preto", "Chevrolet", "Meriva", 2009, 55250f);
+      veiculos.add(v1); veiculos.add(v2); veiculos.add(v3);
    }
 
    /**
@@ -28,7 +31,7 @@ public class TableModelVeiculo extends AbstractTableModel  {
     */
    @Override
    public int getRowCount() {
-      // COMPLETE-ME: retorne o número de colunas que a tabela deve apresentar.
+       return veiculos.size();
    }
    
    /**
@@ -36,7 +39,7 @@ public class TableModelVeiculo extends AbstractTableModel  {
     */
    @Override
    public int getColumnCount() {
-      // COMPLETE-ME: retorne o número de colunas que a tabela deve apresentar.
+      return nomeColunas.length;
    }
    
    /**
@@ -44,6 +47,7 @@ public class TableModelVeiculo extends AbstractTableModel  {
     * @param v {@link Veiculo} Novo veículo a ser adicionado.
     */
    public void add(Veiculo v) {
+       veiculos.add(v);
       // COMPLETE-ME: insira o veículo v na lista.
 
       fireTableRowsInserted(veiculos.size()-1, veiculos.size()-1); // Mantenha essa linha no *final* do método!
@@ -55,6 +59,7 @@ public class TableModelVeiculo extends AbstractTableModel  {
     * @return {@link Veiculo} assocido a tal linha da tabela visual.
     */
    public Veiculo select(int rowSelected) {
+       return veiculos.get(rowSelected);
       // COMPLETE-ME: retorne o veículo da lista associado ao índice rowSelected.
    }
    
@@ -63,6 +68,7 @@ public class TableModelVeiculo extends AbstractTableModel  {
     * @param rowSelected Linha da tabela visual que contém o veículo a ser apagado.
     */
    public void remove(int rowSelected) {
+       veiculos.remove(rowSelected);
       // COMPLETE-ME: remova da lista o veículo associado ao índice rowSelected.
       
       fireTableRowsDeleted(rowSelected, rowSelected); // Mantenha essa linha no *final* do método!
