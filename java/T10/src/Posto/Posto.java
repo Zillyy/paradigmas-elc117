@@ -12,6 +12,13 @@ public class Posto {
     protected String bairro;
     protected int cep;
     protected String imagem;
+    
+    @Override
+    public String toString(){
+        return "CNPJ: " + this.cnpj + ", Razão Social: " + this.razaoSocial + ", Nome Fantasia: " + this.nomeFantasia + 
+                ", Bandeira: " + this.bandeira + ", Endereço: " + this.endereco + ", Bairro: " + this.bairro + 
+                ", CEP: " + this.cep + ", Caminho da imagem: " + this.imagem;
+    }
 
     //Construtor padrão
     public Posto() {
