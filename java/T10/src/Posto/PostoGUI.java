@@ -25,13 +25,13 @@ public class PostoGUI extends javax.swing.JFrame {
     protected Posto constroiPosto() {
         try {
             Posto p = new Posto();
-            p.setCnpj(Integer.parseInt(jtCnpj.getText()));
+            p.setCnpj(jtCnpj.getText());
             p.setRazaoSocial(jtRazaoSocial.getText());
             p.setNomeFantasia(jtNomeFantasia.getText());
             p.setBandeira(jtBandeira.getText());
             p.setEndereco(jtEndereco.getText());
             p.setBairro(jtBairro.getText());
-            p.setCep(Integer.parseInt(jtCep.getText()));
+            p.setCep(jtCep.getText());
             //p.setImagem();
             return p;
         } catch (NumberFormatException|NullPointerException e) {
@@ -77,9 +77,9 @@ public class PostoGUI extends javax.swing.JFrame {
         jLabel8.setText("CEP");
 
         btnLimpar.setText("Limpar");
-        btnLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimparMouseClicked(evt);
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
             }
         });
 
@@ -87,16 +87,16 @@ public class PostoGUI extends javax.swing.JFrame {
 
         btnRemover.setText("Remover");
         btnRemover.setEnabled(false);
-        btnRemover.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRemoverMouseClicked(evt);
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
             }
         });
 
         btnInserir.setText("Inserir");
-        btnInserir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInserirMouseClicked(evt);
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
             }
         });
 
@@ -104,9 +104,9 @@ public class PostoGUI extends javax.swing.JFrame {
 
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
-        btnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAlterarMouseClicked(evt);
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
             }
         });
 
@@ -130,8 +130,6 @@ public class PostoGUI extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtPostos);
-
-        imgPosto.setMaximumSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,15 +235,15 @@ public class PostoGUI extends javax.swing.JFrame {
             btnRemover.setEnabled(true);
             btnAlterar.setEnabled(true);
             Posto p = tableModel.select(row);
-            jtCnpj.setText(p.getCnpj() + "");
+            jtCnpj.setText(p.getCnpj());
             jtRazaoSocial.setText(p.getRazaoSocial());
             jtNomeFantasia.setText(p.getNomeFantasia());
             jtBandeira.setText(p.getBandeira());
             jtEndereco.setText(p.getEndereco());
             jtBairro.setText(p.getBairro());
-            jtCep.setText(p.getCep() + "");
+            jtCep.setText(p.getCep());
+            
             imgPosto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/" + p.getImagem())));
-            imgPosto.setMaximumSize(new java.awt.Dimension(0, 0));
         }
     }//GEN-LAST:event_jtPostosMouseClicked
 
@@ -253,7 +251,7 @@ public class PostoGUI extends javax.swing.JFrame {
         jtPostosMouseClicked(null);
     }//GEN-LAST:event_jtPostosMouseReleased
 
-    private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         int row = jtPostos.getSelectedRow();
         if (row >= 0) {
             Posto p = constroiPosto();
@@ -261,17 +259,17 @@ public class PostoGUI extends javax.swing.JFrame {
                 tableModel.update(row, p);
             }
         }
-    }//GEN-LAST:event_btnAlterarMouseClicked
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void btnRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemoverMouseClicked
-        int row = jtPostos.getSelectedRow();
-        if (row >= 0) {
-            tableModel.remove(row);
-            btnLimparMouseClicked(null);
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        Posto novo = constroiPosto();
+        if (novo != null) {
+            tableModel.add(novo);
+            btnLimparActionPerformed(null);
         }
-    }//GEN-LAST:event_btnRemoverMouseClicked
+    }//GEN-LAST:event_btnInserirActionPerformed
 
-    private void btnLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseClicked
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         jtCnpj.setText("");
         jtRazaoSocial.setText("");
         jtNomeFantasia.setText("");
@@ -280,17 +278,18 @@ public class PostoGUI extends javax.swing.JFrame {
         jtBairro.setText("");
         jtCep.setText("");
         jtPostos.clearSelection();
+        imgPosto.setIcon(null);
         btnRemover.setEnabled(false);
         btnAlterar.setEnabled(false);
-    }//GEN-LAST:event_btnLimparMouseClicked
+    }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void btnInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInserirMouseClicked
-        Posto novo = constroiPosto();
-        if (novo != null) {
-            tableModel.add(novo);
-            btnLimparMouseClicked(null);
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        int row = jtPostos.getSelectedRow();
+        if (row >= 0) {
+            tableModel.remove(row);
+            btnLimparActionPerformed(null);
         }
-    }//GEN-LAST:event_btnInserirMouseClicked
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     /**
      * @param args the command line arguments

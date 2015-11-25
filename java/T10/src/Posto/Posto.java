@@ -4,14 +4,14 @@ package Posto;
  */
 public class Posto {
 
-    protected int cnpj;
-    protected String razaoSocial;
-    protected String nomeFantasia;
-    protected String bandeira;
-    protected String endereco;
-    protected String bairro;
-    protected int cep;
-    protected String imagem;
+    private String cnpj;
+    private String razaoSocial;
+    private String nomeFantasia;
+    private String bandeira;
+    private String endereco;
+    private String bairro;
+    private String cep;
+    private String imagem;
     
     @Override
     public String toString(){
@@ -22,18 +22,18 @@ public class Posto {
 
     //Construtor padrão
     public Posto() {
-        this.cnpj = 0;
+        this.cnpj = "";
         this.razaoSocial = "";
         this.nomeFantasia = "";
         this.bandeira = "";
         this.endereco = "";
         this.bairro = "";
-        this.cep = 0;
+        this.cep = "";
         this.imagem = "";
     }
 
     //Construtor alternativo
-    public Posto(int cnpj, String razaoSocial, String nomeFantasia, String bandeira, String endereco, String bairro, int cep, String imagem) {
+    public Posto(String cnpj, String razaoSocial, String nomeFantasia, String bandeira, String endereco, String bairro, String cep, String imagem) {
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
@@ -45,11 +45,11 @@ public class Posto {
     }
 
     //Getters e Setters
-    public int getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -93,11 +93,11 @@ public class Posto {
         this.bairro = bairro;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
