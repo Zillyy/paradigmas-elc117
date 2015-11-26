@@ -1,45 +1,84 @@
-package Posto;
+package PostoView;
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import PostoController.PostoController;
+import PostoModel.Posto;
+import PostoModel.TableModelPosto;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 /**
  * @author Zilly
  */
 public class PostoGUI extends javax.swing.JFrame {
-
+    private PostoController controller;
+    private TableModelPosto tabelaPosto;
     /**
      * Creates new form PostoGUI2
      */
     public PostoGUI() {
+        tabelaPosto = new TableModelPosto();
+        controller = new PostoController(this, tabelaPosto);   
+        
         // Inicialização manual de algumas coisas...
-        tableModel = new TableModelPosto(); // Model personalizado.
+        //tableModel = new TableModelPosto(); // Model personalizado.
         this.setTitle("Postos de Combustível"); // Atualiza o título da janela.
         this.setResizable(false); // Fixa o tamanho da janela.
         initComponents();
-        jtPostos.setDragEnabled(false);
-        jtPostos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jtTabelaPosto.setDragEnabled(false);
+        jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    
+    public JTextField getJtBairro() {
+        return jtBairro;
     }
 
-    protected Posto constroiPosto() {
-        try {
-            Posto p = new Posto();
-            p.setCnpj(jtCnpj.getText());
-            p.setRazaoSocial(jtRazaoSocial.getText());
-            p.setNomeFantasia(jtNomeFantasia.getText());
-            p.setBandeira(jtBandeira.getText());
-            p.setEndereco(jtEndereco.getText());
-            p.setBairro(jtBairro.getText());
-            p.setCep(jtCep.getText());
-            //p.setImagem();
-            return p;
-        } catch (NumberFormatException|NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Dado(s) de entrada invalido(s)!");
-        }
-        return null;
+    public JTextField getJtBandeira() {
+        return jtBandeira;
     }
 
+    public JTextField getJtCep() {
+        return jtCep;
+    }
+
+    public JTextField getJtCnpj(){
+        return jtCnpj;
+    }
+    
+    public JTextField getJtEndereco() {
+        return jtEndereco;
+    }
+
+    public JTextField getJtNomeFantasia() {
+        return jtNomeFantasia;
+    }
+
+    public JTextField getJtRazaoSocial() {
+        return jtRazaoSocial;
+    }
+
+    public JTable getJtPostos() {
+        return jtTabelaPosto;
+    }
+
+    public JLabel getImgPosto() {
+        return imgPosto;
+    }
+
+    public JButton getBtnAlterar() {
+        return btnAlterar;
+    }
+
+    public JButton getBtnRemover() {
+        return btnRemover;
+    }
+
+    public TableModelPosto getTabelaPosto() {
+        return tabelaPosto;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,7 +108,7 @@ public class PostoGUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 200), new java.awt.Dimension(0, 200), new java.awt.Dimension(32767, 200));
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPostos = new javax.swing.JTable();
+        jtTabelaPosto = new javax.swing.JTable();
         imgPosto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,16 +159,16 @@ public class PostoGUI extends javax.swing.JFrame {
 
         jLabel7.setText("Bairro");
 
-        jtPostos.setModel(tableModel);
-        jtPostos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtTabelaPosto.setModel(tabelaPosto);
+        jtTabelaPosto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtPostosMouseClicked(evt);
+                jtTabelaPostoMouseClicked(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jtPostosMouseReleased(evt);
+                jtTabelaPostoMouseReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jtPostos);
+        jScrollPane1.setViewportView(jtTabelaPosto);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,11 +206,11 @@ public class PostoGUI extends javax.swing.JFrame {
                                     .addComponent(jtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtCep))
                                 .addGap(18, 18, 18)
-                                .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -229,67 +268,29 @@ public class PostoGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtPostosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPostosMouseClicked
-        int row = jtPostos.getSelectedRow();
-        if (row >= 0) {
-            btnRemover.setEnabled(true);
-            btnAlterar.setEnabled(true);
-            Posto p = tableModel.select(row);
-            jtCnpj.setText(p.getCnpj());
-            jtRazaoSocial.setText(p.getRazaoSocial());
-            jtNomeFantasia.setText(p.getNomeFantasia());
-            jtBandeira.setText(p.getBandeira());
-            jtEndereco.setText(p.getEndereco());
-            jtBairro.setText(p.getBairro());
-            jtCep.setText(p.getCep());
-            
-            imgPosto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/" + p.getImagem())));
-        }
-    }//GEN-LAST:event_jtPostosMouseClicked
-
-    private void jtPostosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPostosMouseReleased
-        jtPostosMouseClicked(null);
-    }//GEN-LAST:event_jtPostosMouseReleased
-
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        int row = jtPostos.getSelectedRow();
-        if (row >= 0) {
-            Posto p = constroiPosto();
-            if (p != null) {
-                tableModel.update(row, p);
-            }
-        }
+        controller.update();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-        Posto novo = constroiPosto();
-        if (novo != null) {
-            tableModel.add(novo);
-            btnLimparActionPerformed(null);
-        }
+        controller.add();
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        jtCnpj.setText("");
-        jtRazaoSocial.setText("");
-        jtNomeFantasia.setText("");
-        jtBandeira.setText("");
-        jtEndereco.setText("");
-        jtBairro.setText("");
-        jtCep.setText("");
-        jtPostos.clearSelection();
-        imgPosto.setIcon(null);
-        btnRemover.setEnabled(false);
-        btnAlterar.setEnabled(false);
+        controller.clear();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        int row = jtPostos.getSelectedRow();
-        if (row >= 0) {
-            tableModel.remove(row);
-            btnLimparActionPerformed(null);
-        }
+        controller.delete();
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void jtTabelaPostoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseReleased
+        controller.select();
+    }//GEN-LAST:event_jtTabelaPostoMouseReleased
+
+    private void jtTabelaPostoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseClicked
+        controller.select();
+    }//GEN-LAST:event_jtTabelaPostoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -348,8 +349,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jtCnpj;
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtNomeFantasia;
-    private javax.swing.JTable jtPostos;
     private javax.swing.JTextField jtRazaoSocial;
+    private javax.swing.JTable jtTabelaPosto;
     // End of variables declaration//GEN-END:variables
-    protected TableModelPosto tableModel;
 }

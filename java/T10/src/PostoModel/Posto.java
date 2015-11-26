@@ -1,4 +1,4 @@
-package Posto;
+package PostoModel;
 
 /* @author Zilly
  */

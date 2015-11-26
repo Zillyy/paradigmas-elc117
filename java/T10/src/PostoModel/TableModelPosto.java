@@ -1,4 +1,4 @@
-package Posto;
+package PostoModel;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
