@@ -1,6 +1,7 @@
-package PostoModel;
+package posto.model;
 
-/* @author Zilly
+/** 
+ * @author Zilly
  */
 public class Posto {
 
@@ -12,28 +13,16 @@ public class Posto {
     private String bairro;
     private String cep;
     private String imagem;
+    private String historico;
     
-    @Override
-    public String toString(){
-        return "CNPJ: " + this.cnpj + ", Razão Social: " + this.razaoSocial + ", Nome Fantasia: " + this.nomeFantasia + 
-                ", Bandeira: " + this.bandeira + ", Endereço: " + this.endereco + ", Bairro: " + this.bairro + 
-                ", CEP: " + this.cep + ", Caminho da imagem: " + this.imagem;
-    }
-
     //Construtor padrão
     public Posto() {
-        this.cnpj = "";
-        this.razaoSocial = "";
-        this.nomeFantasia = "";
-        this.bandeira = "";
-        this.endereco = "";
-        this.bairro = "";
-        this.cep = "";
-        this.imagem = "";
+        this("", "", "", "", "", "", "", "", "");
+        
     }
 
     //Construtor alternativo
-    public Posto(String cnpj, String razaoSocial, String nomeFantasia, String bandeira, String endereco, String bairro, String cep, String imagem) {
+    public Posto(String cnpj, String razaoSocial, String nomeFantasia, String bandeira, String endereco, String bairro, String cep, String imagem, String historico) {
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
@@ -42,8 +31,16 @@ public class Posto {
         this.bairro = bairro;
         this.cep = cep;
         this.imagem = imagem;
+        this.historico = historico;
     }
 
+    @Override
+    public String toString(){
+        return "CNPJ: " + this.cnpj + ", Razão Social: " + this.razaoSocial + ", Nome Fantasia: " + this.nomeFantasia + 
+                ", Bandeira: " + this.bandeira + ", Endereço: " + this.endereco + ", Bairro: " + this.bairro + 
+                ", CEP: " + this.cep + ", Caminho da imagem: " + this.imagem + ", Histórico de Combs: " + this.historico;
+    }
+    
     //Getters e Setters
     public String getCnpj() {
         return cnpj;
@@ -108,4 +105,13 @@ public class Posto {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
+
+    public String getHistorico() {
+        return historico;
+    }
+
+    public void setHistorico(String historico) {
+        this.historico = historico;
+    }
 }
+

@@ -1,26 +1,25 @@
-package PostoModel;
+package posto.model;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 /**
- *
  * @author Zilly
  */
 public class TableModelPosto extends AbstractTableModel {
 
-    // Lista de veículos do banco de dados.
+    // Lista de veículos
     private ArrayList<Posto> postos;
 
     // Array com os nomes das colunas da tabela.
-    private static final String[] nomeColunas = {"CNPJ", "Razão Social", "Nome Fantasia", "Bandeira", "Endereço", "Bairro", "CEP", "URL da Imagem"};
+    private static final String[] nomeColunas = {"CNPJ", "Razão Social", "Nome Fantasia", "Bandeira", "Endereço", "Bairro", "CEP"};
 
     //Construtor Padrão
     public TableModelPosto() {
         postos = new ArrayList<>();
-        Posto BR = new Posto("123456789", "Posto de Combustíveis BR", "Posto BR", "Petrobrás", "Rua Venâncio Aires", "Centro", "97956123", "br.jpg");
-        Posto Ipiranga = new Posto("984562123", "Posto de Combustíveis Ipiranga LTDA", "Posto Ipiranga", "Branca", "Avenida Rio Branco", "Centro", "97864512", "ipiranga.jpg");
-        Posto Shell = new Posto("649537215", "Posto de Combustíveis Shell", "Posto Shell", "Branca", "Avenida Medianeira", "Nossa Senhora Medianeira", "97095483", "shell.jpg");
+        Posto BR = new Posto("123456789", "Posto de Combustíveis BR", "Posto BR", "Petrobrás", "Rua Venâncio Aires", "Centro", "97956123", "br.jpg", "br.csv");
+        Posto Ipiranga = new Posto("984562123", "Posto de Combustíveis Ipiranga LTDA", "Posto Ipiranga", "Branca", "Avenida Rio Branco", "Centro", "97864512", "ipiranga.jpg", "");
+        Posto Shell = new Posto("649537215", "Posto de Combustíveis Shell", "Posto Shell", "Branca", "Avenida Medianeira", "Nossa Senhora Medianeira", "97095483", "shell.jpg", "");
         postos.add(BR); postos.add(Ipiranga); postos.add(Shell);
     }
 

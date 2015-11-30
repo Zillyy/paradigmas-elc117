@@ -1,13 +1,15 @@
-package PostoView;
+package posto.view;
 
-import PostoController.PostoController;
-import PostoModel.Posto;
-import PostoModel.TableModelPosto;
+import java.io.IOException;
+import posto.controller.PostoController;
+import posto.model.TableModelPosto;
+import posto.model.TableModelCombustivel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+
 
 /**
  * @author Zilly
@@ -15,20 +17,19 @@ import javax.swing.ListSelectionModel;
 public class PostoGUI extends javax.swing.JFrame {
     private PostoController controller;
     private TableModelPosto tabelaPosto;
+    private TableModelCombustivel tabelaComb;
     /**
-     * Creates new form PostoGUI2
+     * Creates new form PostoGUI
      */
-    public PostoGUI() {
+    public PostoGUI() throws IOException {
         tabelaPosto = new TableModelPosto();
-        controller = new PostoController(this, tabelaPosto);   
+        tabelaComb = new TableModelCombustivel();
+        controller = new PostoController(this, tabelaPosto);
         
-        // Inicialização manual de algumas coisas...
-        //tableModel = new TableModelPosto(); // Model personalizado.
-        this.setTitle("Postos de Combustível"); // Atualiza o título da janela.
-        this.setResizable(false); // Fixa o tamanho da janela.
+        
         initComponents();
-        jtTabelaPosto.setDragEnabled(false);
-        jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        //jtTabelaPosto.setDragEnabled(false);
+        //jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     public JTextField getJtBairro() {
@@ -59,7 +60,7 @@ public class PostoGUI extends javax.swing.JFrame {
         return jtRazaoSocial;
     }
 
-    public JTable getJtPostos() {
+    public JTable getJtTabelaPosto() {
         return jtTabelaPosto;
     }
 
@@ -77,6 +78,10 @@ public class PostoGUI extends javax.swing.JFrame {
 
     public TableModelPosto getTabelaPosto() {
         return tabelaPosto;
+    }
+    
+    public void showError(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
     
     /**
@@ -110,6 +115,8 @@ public class PostoGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabelaPosto = new javax.swing.JTable();
         imgPosto = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtTabelaComb = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,6 +167,7 @@ public class PostoGUI extends javax.swing.JFrame {
         jLabel7.setText("Bairro");
 
         jtTabelaPosto.setModel(tabelaPosto);
+        jtTabelaPosto.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTabelaPosto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtTabelaPostoMouseClicked(evt);
@@ -170,6 +178,9 @@ public class PostoGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtTabelaPosto);
 
+        jtTabelaComb.setName("j"); // NOI18N
+        jScrollPane2.setViewportView(jtTabelaComb);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,40 +188,42 @@ public class PostoGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel1)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jtBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                    .addComponent(jtEndereco, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtBandeira, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtNomeFantasia, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtRazaoSocial, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtCep))
-                                .addGap(18, 18, 18)
-                                .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jtBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                .addComponent(jtEndereco, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtBandeira, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtNomeFantasia, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtRazaoSocial, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtCep))
+                            .addGap(18, 18, 18)
+                            .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -261,7 +274,9 @@ public class PostoGUI extends javax.swing.JFrame {
                     .addComponent(btnRemover)
                     .addComponent(btnInserir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -291,43 +306,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private void jtTabelaPostoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseClicked
         controller.select();
     }//GEN-LAST:event_jtTabelaPostoMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PostoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PostoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PostoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PostoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PostoGUI().setVisible(true);
-            }
-        });
-    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnInserir;
@@ -343,6 +322,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtBandeira;
     private javax.swing.JTextField jtCep;
@@ -350,6 +330,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtNomeFantasia;
     private javax.swing.JTextField jtRazaoSocial;
+    private javax.swing.JTable jtTabelaComb;
     private javax.swing.JTable jtTabelaPosto;
     // End of variables declaration//GEN-END:variables
 }
