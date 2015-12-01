@@ -19,12 +19,12 @@ public class CSVReader {
     private static final int COMB_DATA_COLETA = 1;
     private static final int COMB_PRECO = 2;
 
-    public ArrayList<Combustivel> readFile(String fileName) throws IOException {
+    public ArrayList<Combustivel> readFile(String fileName) { //tratar io nos catch
 
         BufferedReader fileReader = null;
+        ArrayList<Combustivel> listCombs = new ArrayList<>();
 
         try {
-            ArrayList<Combustivel> listCombs = new ArrayList<>();
             String line;
 
             //Cria o file reader
@@ -42,7 +42,8 @@ public class CSVReader {
                 System.out.println(comb);
             }
 
-            //return listCombs;
+        } catch (IOException e){
+            System.out.println("Arquivo não existe!");
         } catch (NumberFormatException e) {
             System.out.println("Erro ao tentar ler preços!");
         } catch (NullPointerException e) {
@@ -54,7 +55,7 @@ public class CSVReader {
                 System.out.println("Erro ao fechar fileReader!");
             }
         }
-        return null;
+        return listCombs;
     }
 
 }

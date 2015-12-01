@@ -18,7 +18,6 @@ public class Posto {
     //Construtor padrão
     public Posto() {
         this("", "", "", "", "", "", "", "", "");
-        
     }
 
     //Construtor alternativo

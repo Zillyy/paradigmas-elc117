@@ -281,6 +281,9 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="jtTabelaComb">
           <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="tabelaComb" type="code"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="j" noResource="true"/>
           </Properties>
         </Component>

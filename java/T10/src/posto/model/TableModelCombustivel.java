@@ -1,7 +1,6 @@
 package posto.model;
 
 import file.manager.CSVReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -10,22 +9,32 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableModelCombustivel extends AbstractTableModel {
 
-    // Lista de veículos do banco de dados.
+    // Lista de combustiveis
     private ArrayList<Combustivel> combs;
 
-    // Array com os nomes das colunas da tabela.
+    // Array com os nomes das colunas da tabela
     private static final String[] nomeColunas = {"Tipo de Combustível", "Data de Coleta", "Preço de Venda"};
 
     //Construtor Padrão
-    public TableModelCombustivel() throws IOException {
+    public TableModelCombustivel(){
+        combs = new ArrayList<>();
+    }
+    
+    //Construtor alternativo 1
+    public TableModelCombustivel(ArrayList<Combustivel> listCombs){
+        this.combs = listCombs;
+    }
+    
+    //Construtor alternativo 2
+    public TableModelCombustivel(String fileName) {
         //combs = new ArrayList<>();
         //Combustivel etanol = new Combustivel("Etanol", "31/01/2015", 2.41f);
-        combs = TableModelCombustivel.getArrayCombs(".\\src\\file\\csv\\br.csv");
+        combs = TableModelCombustivel.getArrayCombs(".\\src\\file\\csv\\" + fileName);
         //combs.add(etanol);
     }
-
-    public static ArrayList<Combustivel> getArrayCombs(String fileName) throws IOException{
-        return new CSVReader().readFile(fileName);
+ 
+    public static ArrayList<Combustivel> getArrayCombs(String fileName){  //colocar isso em um dao
+        return new CSVReader().readFile(".\\src\\file\\csv\\" + fileName);
     }
     
     //Adiciona um novo posto

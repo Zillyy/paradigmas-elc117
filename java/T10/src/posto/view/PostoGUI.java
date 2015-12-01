@@ -10,28 +10,29 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-
 /**
  * @author Zilly
  */
 public class PostoGUI extends javax.swing.JFrame {
+
     private PostoController controller;
     private TableModelPosto tabelaPosto;
     private TableModelCombustivel tabelaComb;
+
     /**
      * Creates new form PostoGUI
      */
-    public PostoGUI() throws IOException {
+    public PostoGUI() {
         tabelaPosto = new TableModelPosto();
+        //jtTabelaComb.setModel();
         tabelaComb = new TableModelCombustivel();
-        controller = new PostoController(this, tabelaPosto);
-        
-        
+        controller = new PostoController(this, tabelaPosto, tabelaComb);
+
         initComponents();
         //jtTabelaPosto.setDragEnabled(false);
         //jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
     public JTextField getJtBairro() {
         return jtBairro;
     }
@@ -44,10 +45,10 @@ public class PostoGUI extends javax.swing.JFrame {
         return jtCep;
     }
 
-    public JTextField getJtCnpj(){
+    public JTextField getJtCnpj() {
         return jtCnpj;
     }
-    
+
     public JTextField getJtEndereco() {
         return jtEndereco;
     }
@@ -58,10 +59,6 @@ public class PostoGUI extends javax.swing.JFrame {
 
     public JTextField getJtRazaoSocial() {
         return jtRazaoSocial;
-    }
-
-    public JTable getJtTabelaPosto() {
-        return jtTabelaPosto;
     }
 
     public JLabel getImgPosto() {
@@ -76,14 +73,29 @@ public class PostoGUI extends javax.swing.JFrame {
         return btnRemover;
     }
 
+    //Getters para a tabela dos Postos
     public TableModelPosto getTabelaPosto() {
         return tabelaPosto;
     }
     
+    public JTable getJtTabelaPosto() {
+        return jtTabelaPosto;
+    }
+
+    //Getters para a tabela dos Combustíveis
+    public TableModelCombustivel getTabelaComb() {
+        return tabelaComb;
+    }
+
+    public JTable getJtTabelaComb() {
+        return jtTabelaComb;
+    }
+
+    //Cria Option Pane com mensagem de erro
     public void showError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,6 +190,7 @@ public class PostoGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtTabelaPosto);
 
+        jtTabelaComb.setModel(tabelaComb);
         jtTabelaComb.setName("j"); // NOI18N
         jScrollPane2.setViewportView(jtTabelaComb);
 
@@ -300,13 +313,13 @@ public class PostoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void jtTabelaPostoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseReleased
-        controller.select();
+        controller.selectPosto();
     }//GEN-LAST:event_jtTabelaPostoMouseReleased
 
     private void jtTabelaPostoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseClicked
-        controller.select();
+        controller.selectPosto();
     }//GEN-LAST:event_jtTabelaPostoMouseClicked
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnInserir;

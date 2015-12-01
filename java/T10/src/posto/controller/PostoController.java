@@ -1,5 +1,8 @@
 package posto.controller;
 
+import java.util.ArrayList;
+import posto.model.Combustivel;
+import posto.model.TableModelCombustivel;
 import posto.model.Posto;
 import posto.model.TableModelPosto;
 import posto.view.PostoGUI;
@@ -11,10 +14,12 @@ public class PostoController {
 
     private PostoGUI view;
     private TableModelPosto tabelaPosto;
+    private TableModelCombustivel tabelaComb;
 
-    public PostoController(PostoGUI view, TableModelPosto tabelaPosto) {
+    public PostoController(PostoGUI view, TableModelPosto tabelaPosto, TableModelCombustivel tabelaComb) {
         this.view = view;
         this.tabelaPosto = tabelaPosto;
+        this.tabelaComb = tabelaComb;
 
         view.setTitle("Postos de Combustível"); // Atualiza o título da janela.
         view.setResizable(false); // Fixa o tamanho da janela.
@@ -34,6 +39,18 @@ public class PostoController {
             return p;
         } catch (NumberFormatException | NullPointerException e) {
             view.showError("Dado(s) de entrada invalido(s)!");
+            return null;
+        }
+    }
+    
+    private Combustivel constroiComb(){
+        try{
+            Combustivel c = new Combustivel();
+            
+            //c.setTipo();
+            return c;
+        }catch(NumberFormatException | NullPointerException e){
+            view.showError("Dado(s) de combustível invalido(s)!");
             return null;
         }
     }
@@ -79,9 +96,10 @@ public class PostoController {
         view.getBtnAlterar().setEnabled(false);
     }
 
-    public void select() {
+    public void selectPosto() {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
+            //Posto
             Posto p = view.getTabelaPosto().select(row);
             view.getJtCnpj().setText(p.getCnpj());
             view.getJtRazaoSocial().setText(p.getRazaoSocial());
@@ -96,6 +114,11 @@ public class PostoController {
 
             view.getBtnRemover().setEnabled(true);
             view.getBtnAlterar().setEnabled(true);
+            
+            //Combustivel
+            ArrayList<Combustivel> listCombs = TableModelCombustivel.getArrayCombs(p.getHistorico());
+            TableModelCombustivel tC = new TableModelCombustivel(listCombs);
+            view.getJtTabelaComb().setModel(tC);
         }
     }
 }
