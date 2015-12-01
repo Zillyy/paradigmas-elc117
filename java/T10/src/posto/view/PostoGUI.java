@@ -1,10 +1,11 @@
 package posto.view;
 
-import java.io.IOException;
+import javafx.stage.FileChooser;
 import posto.controller.PostoController;
 import posto.model.TableModelPosto;
 import posto.model.TableModelCombustivel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -24,7 +25,7 @@ public class PostoGUI extends javax.swing.JFrame {
      */
     public PostoGUI() {
         tabelaPosto = new TableModelPosto();
-        //jtTabelaComb.setModel();
+        //tabela é criada com arrayList vazio por default
         tabelaComb = new TableModelCombustivel();
         controller = new PostoController(this, tabelaPosto, tabelaComb);
 
@@ -91,6 +92,10 @@ public class PostoGUI extends javax.swing.JFrame {
         return jtTabelaComb;
     }
 
+    public JFileChooser getFc() {
+        return fc;
+    }
+    
     //Cria Option Pane com mensagem de erro
     public void showError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
@@ -129,6 +134,7 @@ public class PostoGUI extends javax.swing.JFrame {
         imgPosto = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtTabelaComb = new javax.swing.JTable();
+        btnImgChooser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -192,7 +198,15 @@ public class PostoGUI extends javax.swing.JFrame {
 
         jtTabelaComb.setModel(tabelaComb);
         jtTabelaComb.setName("j"); // NOI18N
+        jtTabelaComb.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jtTabelaComb);
+
+        btnImgChooser.setText("Escolher Imagem");
+        btnImgChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImgChooserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,7 +223,9 @@ public class PostoGUI extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnImgChooser))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,8 +246,8 @@ public class PostoGUI extends javax.swing.JFrame {
                                 .addComponent(jtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jtCep))
                             .addGap(18, 18, 18)
-                            .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(26, 26, 26)
                             .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,6 +261,7 @@ public class PostoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filler2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -274,18 +291,18 @@ public class PostoGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
                                     .addComponent(jtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(filler2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar)
                     .addComponent(btnAlterar)
                     .addComponent(btnRemover)
-                    .addComponent(btnInserir))
+                    .addComponent(btnInserir)
+                    .addComponent(btnImgChooser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -297,19 +314,19 @@ public class PostoGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        controller.update();
+        controller.updatePosto();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-        controller.add();
+        controller.addPosto();
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        controller.clear();
+        controller.clearPosto();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        controller.delete();
+        controller.deletePosto();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void jtTabelaPostoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseReleased
@@ -320,8 +337,14 @@ public class PostoGUI extends javax.swing.JFrame {
         controller.selectPosto();
     }//GEN-LAST:event_jtTabelaPostoMouseClicked
 
+    private void btnImgChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgChooserActionPerformed
+        fc = new JFileChooser();
+        controller.selectImg();
+    }//GEN-LAST:event_btnImgChooserActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnImgChooser;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnRemover;
@@ -346,4 +369,5 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JTable jtTabelaComb;
     private javax.swing.JTable jtTabelaPosto;
     // End of variables declaration//GEN-END:variables
+    private JFileChooser fc;
 }

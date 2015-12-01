@@ -9,7 +9,7 @@ import posto.model.Combustivel;
 /**
  * @author Zilly
  */
-public class CSVReader {
+public class CSVReaderComb {
 
     //Delimitador
     private static final String COMMA_DELIMITER = ",";
@@ -19,8 +19,7 @@ public class CSVReader {
     private static final int COMB_DATA_COLETA = 1;
     private static final int COMB_PRECO = 2;
 
-    public ArrayList<Combustivel> readFile(String fileName) { //tratar io nos catch
-
+    public ArrayList<Combustivel> readFileComb(String fileName) {
         BufferedReader fileReader = null;
         ArrayList<Combustivel> listCombs = new ArrayList<>();
 
@@ -42,7 +41,7 @@ public class CSVReader {
                 System.out.println(comb);
             }
 
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Arquivo não existe!");
         } catch (NumberFormatException e) {
             System.out.println("Erro ao tentar ler preços!");

@@ -1,5 +1,6 @@
 package posto.model;
 
+import file.dao.PostoDao;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,11 +17,7 @@ public class TableModelPosto extends AbstractTableModel {
 
     //Construtor Padrão
     public TableModelPosto() {
-        postos = new ArrayList<>();
-        Posto BR = new Posto("123456789", "Posto de Combustíveis BR", "Posto BR", "Petrobrás", "Rua Venâncio Aires", "Centro", "97956123", "br.jpg", "br.csv");
-        Posto Ipiranga = new Posto("984562123", "Posto de Combustíveis Ipiranga LTDA", "Posto Ipiranga", "Branca", "Avenida Rio Branco", "Centro", "97864512", "ipiranga.jpg", "ipiranga.csv");
-        Posto Shell = new Posto("649537215", "Posto de Combustíveis Shell", "Posto Shell", "Branca", "Avenida Medianeira", "Nossa Senhora Medianeira", "97095483", "shell.jpg", "shell.csv");
-        postos.add(BR); postos.add(Ipiranga); postos.add(Shell);
+        postos = PostoDao.getArrayCombs("postos.csv");
     }
 
     //Adiciona um novo posto

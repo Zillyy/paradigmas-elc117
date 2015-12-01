@@ -1,6 +1,7 @@
 package posto.controller;
 
-import java.util.ArrayList;
+import java.io.File;
+import javax.swing.JFileChooser;
 import posto.model.Combustivel;
 import posto.model.TableModelCombustivel;
 import posto.model.Posto;
@@ -36,34 +37,35 @@ public class PostoController {
             p.setBairro(view.getJtBairro().getText());
             p.setCep(view.getJtCep().getText());
             p.setImagem(view.getImgPosto().getText());
+            //p.setHistorico();
             return p;
         } catch (NumberFormatException | NullPointerException e) {
             view.showError("Dado(s) de entrada invalido(s)!");
             return null;
         }
     }
-    
-    private Combustivel constroiComb(){
-        try{
+
+    private Combustivel constroiComb() {
+        try {
             Combustivel c = new Combustivel();
-            
+
             //c.setTipo();
             return c;
-        }catch(NumberFormatException | NullPointerException e){
+        } catch (NumberFormatException | NullPointerException e) {
             view.showError("Dado(s) de combustível invalido(s)!");
             return null;
         }
     }
 
-    public void add() {
+    public void addPosto() {
         Posto novo = constroiPosto();
         if (novo != null) {
             tabelaPosto.add(novo);
-            clear();
+            clearPosto();
         }
     }
 
-    public void update() {
+    public void updatePosto() {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
             Posto p = constroiPosto();
@@ -73,15 +75,16 @@ public class PostoController {
         }
     }
 
-    public void delete() {
+    public void deletePosto() {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
             tabelaPosto.remove(row);
-            clear();
+            clearPosto();
         }
     }
 
-    public void clear() {
+    public void clearPosto() {
+        //Posto
         view.getJtCnpj().setText("");
         view.getJtRazaoSocial().setText("");
         view.getJtNomeFantasia().setText("");
@@ -94,6 +97,10 @@ public class PostoController {
         view.getImgPosto().setText("");
         view.getBtnRemover().setEnabled(false);
         view.getBtnAlterar().setEnabled(false);
+
+        //Combustivel
+        tabelaComb = new TableModelCombustivel();
+        view.getJtTabelaComb().setModel(tabelaComb);
     }
 
     public void selectPosto() {
@@ -109,16 +116,32 @@ public class PostoController {
             view.getJtBairro().setText(p.getBairro());
             view.getJtCep().setText(p.getCep());
 
-            view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/" + p.getImagem())));
+            view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + p.getImagem())));
             view.getImgPosto().setText(p.getImagem());
 
             view.getBtnRemover().setEnabled(true);
             view.getBtnAlterar().setEnabled(true);
-            
+
             //Combustivel
-            ArrayList<Combustivel> listCombs = TableModelCombustivel.getArrayCombs(p.getHistorico());
-            TableModelCombustivel tC = new TableModelCombustivel(listCombs);
-            view.getJtTabelaComb().setModel(tC);
+            tabelaComb = new TableModelCombustivel(p.getHistorico());
+            view.getJtTabelaComb().setModel(tabelaComb);
         }
+    }
+
+    public void selectImg() {
+        view.getFc().setFileSelectionMode(JFileChooser.FILES_ONLY);
+        view.getFc().showOpenDialog(view);
+        File f = view.getFc().getSelectedFile();
+        System.out.println(pathParser(f.getPath()));
+
+        //String path = f.get
+        view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + pathParser(f.getPath()))));
+        view.getImgPosto().setText(pathParser(f.getPath()));
+    }
+
+    private String pathParser(String path) {
+        String pathR = path.replace("\\", "/");
+        String[] split = pathR.split("/");
+        return split[split.length - 1];
     }
 }
