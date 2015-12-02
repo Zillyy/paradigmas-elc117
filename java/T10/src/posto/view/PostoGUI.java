@@ -1,6 +1,5 @@
 package posto.view;
 
-import javafx.stage.FileChooser;
 import posto.controller.PostoController;
 import posto.model.TableModelPosto;
 import posto.model.TableModelCombustivel;
@@ -9,7 +8,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 
 /**
  * @author Zilly
@@ -34,31 +33,31 @@ public class PostoGUI extends javax.swing.JFrame {
         //jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    public JTextField getJtBairro() {
+    public JFormattedTextField getJtBairro() {
         return jtBairro;
     }
 
-    public JTextField getJtBandeira() {
+    public JFormattedTextField getJtBandeira() {
         return jtBandeira;
     }
 
-    public JTextField getJtCep() {
+    public JFormattedTextField getJtCep() {
         return jtCep;
     }
 
-    public JTextField getJtCnpj() {
+    public JFormattedTextField getJtCnpj() {
         return jtCnpj;
     }
 
-    public JTextField getJtEndereco() {
+    public JFormattedTextField getJtEndereco() {
         return jtEndereco;
     }
 
-    public JTextField getJtNomeFantasia() {
+    public JFormattedTextField getJtNomeFantasia() {
         return jtNomeFantasia;
     }
 
-    public JTextField getJtRazaoSocial() {
+    public JFormattedTextField getJtRazaoSocial() {
         return jtRazaoSocial;
     }
 
@@ -67,11 +66,11 @@ public class PostoGUI extends javax.swing.JFrame {
     }
 
     public JButton getBtnAlterar() {
-        return btnAlterar;
+        return btnAlterarPosto;
     }
 
     public JButton getBtnRemover() {
-        return btnRemover;
+        return btnRemoverPosto;
     }
 
     //Getters para a tabela dos Postos
@@ -111,66 +110,70 @@ public class PostoGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
-        btnLimpar = new javax.swing.JButton();
-        jtCnpj = new javax.swing.JTextField();
-        btnRemover = new javax.swing.JButton();
-        jtRazaoSocial = new javax.swing.JTextField();
-        btnInserir = new javax.swing.JButton();
-        jtNomeFantasia = new javax.swing.JTextField();
-        jtBandeira = new javax.swing.JTextField();
-        jtEndereco = new javax.swing.JTextField();
-        jtBairro = new javax.swing.JTextField();
-        jtCep = new javax.swing.JTextField();
+        btnLimparPosto = new javax.swing.JButton();
+        btnRemoverPosto = new javax.swing.JButton();
+        btnInserirPosto = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnAlterar = new javax.swing.JButton();
+        btnAlterarPosto = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 200), new java.awt.Dimension(0, 200), new java.awt.Dimension(32767, 200));
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabelaPosto = new javax.swing.JTable();
         imgPosto = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtTabelaComb = new javax.swing.JTable();
         btnImgChooser = new javax.swing.JButton();
+        btnLimparComb = new javax.swing.JButton();
+        btnAlterarComb = new javax.swing.JButton();
+        btnRemoverComb = new javax.swing.JButton();
+        btnInserirComb = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jtCnpj = new javax.swing.JFormattedTextField();
+        jtCep = new javax.swing.JFormattedTextField();
+        jtRazaoSocial = new javax.swing.JFormattedTextField();
+        jtNomeFantasia = new javax.swing.JFormattedTextField();
+        jtBandeira = new javax.swing.JFormattedTextField();
+        jtEndereco = new javax.swing.JFormattedTextField();
+        jtBairro = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel8.setText("CEP");
 
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+        btnLimparPosto.setText("Limpar");
+        btnLimparPosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
+                btnLimparPostoActionPerformed(evt);
             }
         });
 
-        jtCnpj.setName(""); // NOI18N
-
-        btnRemover.setText("Remover");
-        btnRemover.setEnabled(false);
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoverPosto.setText("Remover");
+        btnRemoverPosto.setEnabled(false);
+        btnRemoverPosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
+                btnRemoverPostoActionPerformed(evt);
             }
         });
 
-        btnInserir.setText("Inserir");
-        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+        btnInserirPosto.setText("Inserir");
+        btnInserirPosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInserirActionPerformed(evt);
+                btnInserirPostoActionPerformed(evt);
             }
         });
 
         jLabel1.setText("CNPJ");
 
-        btnAlterar.setText("Alterar");
-        btnAlterar.setEnabled(false);
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarPosto.setText("Alterar");
+        btnAlterarPosto.setEnabled(false);
+        btnAlterarPosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
+                btnAlterarPostoActionPerformed(evt);
             }
         });
 
@@ -196,6 +199,8 @@ public class PostoGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtTabelaPosto);
 
+        imgPosto.setForeground(java.awt.SystemColor.activeCaptionBorder);
+
         jtTabelaComb.setModel(tabelaComb);
         jtTabelaComb.setName("j"); // NOI18N
         jtTabelaComb.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -208,6 +213,32 @@ public class PostoGUI extends javax.swing.JFrame {
             }
         });
 
+        btnLimparComb.setText("Limpar");
+
+        btnAlterarComb.setText("Alterar");
+
+        btnRemoverComb.setText("Remover");
+
+        btnInserirComb.setText("Inserir");
+
+        jLabel2.setText("Tipo de Combustível");
+
+        jLabel9.setText("Data de Coleta ");
+
+        jLabel10.setText("Preço de Venda");
+
+        try {
+            jtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,53 +246,80 @@ public class PostoGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnImgChooser))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                .addComponent(jtEndereco, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtBandeira, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtNomeFantasia, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtRazaoSocial, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtCep))
-                            .addGap(18, 18, 18)
-                            .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(26, 26, 26)
-                            .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimparPosto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(btnAlterarPosto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemoverPosto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInserirPosto)
+                        .addGap(218, 218, 218)
+                        .addComponent(btnImgChooser))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                .addComponent(jtRazaoSocial)
+                                .addComponent(jtNomeFantasia)
+                                .addComponent(jtBandeira)
+                                .addComponent(jtEndereco))
+                            .addComponent(jtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(116, 116, 116)
+                        .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimparComb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAlterarComb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemoverComb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInserirComb)
+                        .addGap(66, 66, 66))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel10)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLimparComb)
+                            .addComponent(btnAlterarComb)
+                            .addComponent(btnRemoverComb)
+                            .addComponent(btnInserirComb)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filler2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -283,51 +341,44 @@ public class PostoGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
                                     .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
                                     .addComponent(jtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
-                                    .addComponent(jtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpar)
-                    .addComponent(btnAlterar)
-                    .addComponent(btnRemover)
-                    .addComponent(btnInserir)
-                    .addComponent(btnImgChooser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(imgPosto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLimparPosto)
+                            .addComponent(btnAlterarPosto)
+                            .addComponent(btnRemoverPosto)
+                            .addComponent(btnInserirPosto)
+                            .addComponent(btnImgChooser))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+    private void btnAlterarPostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarPostoActionPerformed
         controller.updatePosto();
-    }//GEN-LAST:event_btnAlterarActionPerformed
+    }//GEN-LAST:event_btnAlterarPostoActionPerformed
 
-    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+    private void btnInserirPostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirPostoActionPerformed
         controller.addPosto();
-    }//GEN-LAST:event_btnInserirActionPerformed
+    }//GEN-LAST:event_btnInserirPostoActionPerformed
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    private void btnLimparPostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPostoActionPerformed
         controller.clearPosto();
-    }//GEN-LAST:event_btnLimparActionPerformed
+    }//GEN-LAST:event_btnLimparPostoActionPerformed
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+    private void btnRemoverPostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverPostoActionPerformed
         controller.deletePosto();
-    }//GEN-LAST:event_btnRemoverActionPerformed
+    }//GEN-LAST:event_btnRemoverPostoActionPerformed
 
     private void jtTabelaPostoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPostoMouseReleased
         controller.selectPosto();
@@ -343,29 +394,35 @@ public class PostoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImgChooserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnAlterarComb;
+    private javax.swing.JButton btnAlterarPosto;
     private javax.swing.JButton btnImgChooser;
-    private javax.swing.JButton btnInserir;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnRemover;
-    private javax.swing.Box.Filler filler2;
+    private javax.swing.JButton btnInserirComb;
+    private javax.swing.JButton btnInserirPosto;
+    private javax.swing.JButton btnLimparComb;
+    private javax.swing.JButton btnLimparPosto;
+    private javax.swing.JButton btnRemoverComb;
+    private javax.swing.JButton btnRemoverPosto;
     private javax.swing.JLabel imgPosto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jtBairro;
-    private javax.swing.JTextField jtBandeira;
-    private javax.swing.JTextField jtCep;
-    private javax.swing.JTextField jtCnpj;
-    private javax.swing.JTextField jtEndereco;
-    private javax.swing.JTextField jtNomeFantasia;
-    private javax.swing.JTextField jtRazaoSocial;
+    private javax.swing.JFormattedTextField jtBairro;
+    private javax.swing.JFormattedTextField jtBandeira;
+    private javax.swing.JFormattedTextField jtCep;
+    private javax.swing.JFormattedTextField jtCnpj;
+    private javax.swing.JFormattedTextField jtEndereco;
+    private javax.swing.JFormattedTextField jtNomeFantasia;
+    private javax.swing.JFormattedTextField jtRazaoSocial;
     private javax.swing.JTable jtTabelaComb;
     private javax.swing.JTable jtTabelaPosto;
     // End of variables declaration//GEN-END:variables

@@ -132,11 +132,11 @@ public class PostoController {
         view.getFc().setFileSelectionMode(JFileChooser.FILES_ONLY);
         view.getFc().showOpenDialog(view);
         File f = view.getFc().getSelectedFile();
+        
+        String path = pathParser(f.getPath());
         System.out.println(pathParser(f.getPath()));
-
-        //String path = f.get
-        view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + pathParser(f.getPath()))));
-        view.getImgPosto().setText(pathParser(f.getPath()));
+        view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + path)));
+        view.getImgPosto().setText(path);
     }
 
     private String pathParser(String path) {
