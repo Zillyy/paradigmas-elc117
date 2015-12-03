@@ -44,9 +44,9 @@ public class CSVReaderPosto {
                 }
             }
 
-            for (Posto comb : listPostos) {
-                System.out.println(comb);
-            }
+//            for (Posto comb : listPostos) {
+//                System.out.println(comb);
+//            }
 
         } catch (IOException e) {
             System.out.println("Arquivo não existe!");

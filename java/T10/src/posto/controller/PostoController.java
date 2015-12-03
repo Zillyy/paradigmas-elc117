@@ -1,11 +1,15 @@
 package posto.controller;
 
+import file.dao.CombustivelDao;
+import file.dao.PostoDao;
 import java.io.File;
+import java.util.ArrayList;
 import posto.model.Combustivel;
 import posto.model.TableModelCombustivel;
 import posto.model.Posto;
 import posto.model.TableModelPosto;
 import posto.view.PostoGUI;
+import file.dao.PostoDao;
 
 /**
  * @author Zilly
@@ -37,6 +41,7 @@ public class PostoController {
             p.setCep(view.getJtCep().getText());
             p.setImagem(view.getImgPosto().getText());
             p.setHistorico(view.getJtHistorico().getText());
+            p.setCombustiveis(new ArrayList<>());
             return p;
         } catch (NumberFormatException | NullPointerException e) {
             view.showError("Dado(s) de entrada invalido(s)!");
@@ -103,7 +108,6 @@ public class PostoController {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
             //Posto
-            //Posto p = view.getTabelaPosto().select(row);
             Posto p = tabelaPosto.select(row);
             view.getJtCnpj().setText(p.getCnpj());
             view.getJtRazaoSocial().setText(p.getRazaoSocial());
@@ -121,8 +125,11 @@ public class PostoController {
             view.getBtnAlterarPosto().setEnabled(true);
 
             //Combustivel
-            tabelaComb = new TableModelCombustivel(p.getHistorico());
+            tabelaComb = new TableModelCombustivel(p.getCombustiveis());
             view.getJtTabelaComb().setModel(tabelaComb);
+            view.getJtTipoComb().setText("");
+            view.getJtDataColeta().setText("");
+            view.getJtPrecoVenda().setText("");
             view.getBtnInserirComb().setEnabled(true);
             view.getBtnLimparComb().setEnabled(true);
         }
@@ -133,12 +140,12 @@ public class PostoController {
         File f = view.getFc().getSelectedFile();
         if (f != null) {
             String path = pathParser(f.getPath());
-            System.out.println(path);
             view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + path)));
             view.getImgPosto().setText(path);
         }
     }
 
+    //Função que retorna somente o nome do arquivo
     private String pathParser(String path) {
         String pathR = path.replace("\\", "/");
         String[] split = pathR.split("/");
@@ -166,8 +173,8 @@ public class PostoController {
             clearComb();
         }
     }
-    
-    public void updateComb(){
+
+    public void updateComb() {
         int row = view.getJtTabelaComb().getSelectedRow();
         if (row >= 0) {
             Combustivel c = constroiComb();
@@ -176,7 +183,7 @@ public class PostoController {
             }
         }
     }
-    
+
     public void deleteComb() {
         int row = view.getJtTabelaComb().getSelectedRow();
         if (row >= 0) {
@@ -184,8 +191,8 @@ public class PostoController {
             clearComb();
         }
     }
-    
-    public void clearComb(){
+
+    public void clearComb() {
         view.getJtTipoComb().setText("");
         view.getJtDataColeta().setText("");
         view.getJtPrecoVenda().setText("");
@@ -193,12 +200,11 @@ public class PostoController {
         view.getBtnAlterarComb().setEnabled(false);
         view.getJtTabelaComb().clearSelection();
     }
-    
+
     public void selectComb() {
         int row = view.getJtTabelaComb().getSelectedRow();
         if (row >= 0) {
             //Posto
-            //Combustivel c = view.getTabelaComb().select(row);
             Combustivel c = tabelaComb.select(row);
             view.getJtTipoComb().setText(c.getTipo());
             view.getJtDataColeta().setText(c.getDataColeta());
@@ -206,6 +212,13 @@ public class PostoController {
 
             view.getBtnRemoverComb().setEnabled(true);
             view.getBtnAlterarComb().setEnabled(true);
+        }
+    }
+
+    public void salvarArq() {
+        PostoDao.salvarPostos("postos.csv", tabelaPosto.getPostos());
+        for (Posto posto : tabelaPosto.getPostos()) {
+            CombustivelDao.salvarCombustiveis(posto.getHistorico(), posto.getCombustiveis());
         }
     }
 }

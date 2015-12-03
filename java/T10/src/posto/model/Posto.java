@@ -1,5 +1,8 @@
 package posto.model;
 
+import file.dao.CombustivelDao;
+import java.util.ArrayList;
+
 /** 
  * @author Zilly
  */
@@ -14,6 +17,7 @@ public class Posto {
     private String cep;
     private String imagem;
     private String historico;
+    private ArrayList<Combustivel> combustiveis;
     
     //Construtor padrão
     public Posto() {
@@ -31,6 +35,12 @@ public class Posto {
         this.cep = cep;
         this.imagem = imagem;
         this.historico = historico;
+        if(!historico.equals("")){
+            this.combustiveis = CombustivelDao.getArrayCombs(historico);
+        }
+        else{
+            this.combustiveis = new ArrayList<>();
+        }
     }
 
     @Override
@@ -111,6 +121,14 @@ public class Posto {
 
     public void setHistorico(String historico) {
         this.historico = historico;
+    }
+
+    public ArrayList<Combustivel> getCombustiveis() {
+        return combustiveis;
+    }
+
+    public void setCombustiveis(ArrayList<Combustivel> combustiveis) {
+        this.combustiveis = combustiveis;
     }
 }
 

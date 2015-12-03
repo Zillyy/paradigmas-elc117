@@ -20,6 +20,11 @@ public class TableModelPosto extends AbstractTableModel {
         postos = PostoDao.getArrayCombs("postos.csv");
     }
 
+    //Getter do ArrayList de Postos
+    public ArrayList<Posto> getPostos() {
+        return postos;
+    }
+
     //Adiciona um novo posto
     public void add(Posto p) {
         postos.add(p);

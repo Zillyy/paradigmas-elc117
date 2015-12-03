@@ -1,6 +1,5 @@
 package posto.model;
 
-import file.dao.CombustivelDao;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -24,15 +23,7 @@ public class TableModelCombustivel extends AbstractTableModel {
     public TableModelCombustivel(ArrayList<Combustivel> listCombs){
         this.combs = listCombs;
     }
-    
-    //Construtor alternativo 2
-    public TableModelCombustivel(String fileName) {
-        //combs = new ArrayList<>();
-        //Combustivel etanol = new Combustivel("Etanol", "31/01/2015", 2.41f);
-        combs = CombustivelDao.getArrayCombs(fileName);
-        //combs.add(etanol);
-    }
-    
+       
     //Adiciona um novo Combustivel
     public void add(Combustivel c) {
         combs.add(c);

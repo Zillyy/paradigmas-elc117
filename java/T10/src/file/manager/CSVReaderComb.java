@@ -37,9 +37,9 @@ public class CSVReaderComb {
                 }
             }
 
-            for (Combustivel comb : listCombs) {
-                System.out.println(comb);
-            }
+//            for (Combustivel comb : listCombs) {
+//                System.out.println(comb);
+//            }
 
         } catch (IOException e) {
             System.out.println("Arquivo não existe!");
