@@ -29,8 +29,6 @@ public class PostoGUI extends javax.swing.JFrame {
         controller = new PostoController(this, tabelaPosto, tabelaComb);
 
         initComponents();
-        //jtTabelaPosto.setDragEnabled(false);
-        //jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     //Getters dos TextField
@@ -60,6 +58,10 @@ public class PostoGUI extends javax.swing.JFrame {
 
     public JFormattedTextField getJtRazaoSocial() {
         return jtRazaoSocial;
+    }
+
+    public JFormattedTextField getJtHistorico() {
+        return jtHistorico;
     }
 
     public JFormattedTextField getJtDataColeta() {
@@ -105,23 +107,24 @@ public class PostoGUI extends javax.swing.JFrame {
     }
 
     //Getters para a tabela dos Postos
-    public TableModelPosto getTabelaPosto() {
-        return tabelaPosto;
-    }
+//    public TableModelPosto getTabelaPosto() {
+//        return tabelaPosto;
+//    }
 
     public JTable getJtTabelaPosto() {
         return jtTabelaPosto;
     }
 
     //Getters para a tabela dos Combustíveis
-    public TableModelCombustivel getTabelaComb() {
-        return tabelaComb;
-    }
+//    public TableModelCombustivel getTabelaComb() {
+//        return tabelaComb;
+//    }
 
     public JTable getJtTabelaComb() {
         return jtTabelaComb;
     }
 
+    //Getter do FileChooser
     public JFileChooser getFc() {
         return fc;
     }
@@ -141,6 +144,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         fc = new javax.swing.JFileChooser();
+        jtHistorico = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         btnLimparPosto = new javax.swing.JButton();
         btnRemoverPosto = new javax.swing.JButton();
@@ -177,9 +181,14 @@ public class PostoGUI extends javax.swing.JFrame {
         jtPrecoVenda = new javax.swing.JFormattedTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         fc.setCurrentDirectory(new java.io.File("D:\\Google Drive\\facul\\semestre_03\\github\\paradigmas-elc117\\java\\T10\\src\\file\\img"));
         fc.setFileFilter(new ImgPostoFilter());
+
+        jtHistorico.setText("jFormattedTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -244,6 +253,14 @@ public class PostoGUI extends javax.swing.JFrame {
         jtTabelaComb.setModel(tabelaComb);
         jtTabelaComb.setName("j"); // NOI18N
         jtTabelaComb.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtTabelaComb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTabelaCombMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtTabelaCombMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtTabelaComb);
 
         btnImgChooser.setText("Escolher Imagem");
@@ -255,15 +272,35 @@ public class PostoGUI extends javax.swing.JFrame {
 
         btnLimparComb.setText("Limpar");
         btnLimparComb.setEnabled(false);
+        btnLimparComb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCombActionPerformed(evt);
+            }
+        });
 
         btnAlterarComb.setText("Alterar");
         btnAlterarComb.setEnabled(false);
+        btnAlterarComb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarCombActionPerformed(evt);
+            }
+        });
 
         btnRemoverComb.setText("Remover");
         btnRemoverComb.setEnabled(false);
+        btnRemoverComb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverCombActionPerformed(evt);
+            }
+        });
 
         btnInserirComb.setText("Inserir");
         btnInserirComb.setEnabled(false);
+        btnInserirComb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirCombActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Tipo de Combustível");
 
@@ -286,6 +323,14 @@ public class PostoGUI extends javax.swing.JFrame {
         jFormattedTextField1.setText("jFormattedTextField1");
 
         jButton1.setText("jButton1");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,9 +374,6 @@ public class PostoGUI extends javax.swing.JFrame {
                         .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,7 +397,10 @@ public class PostoGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverComb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnInserirComb)))
+                        .addComponent(btnInserirComb))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -363,8 +408,8 @@ public class PostoGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -427,7 +472,7 @@ public class PostoGUI extends javax.swing.JFrame {
                             .addComponent(btnRemoverPosto)
                             .addComponent(btnInserirPosto)
                             .addComponent(btnImgChooser))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -462,6 +507,30 @@ public class PostoGUI extends javax.swing.JFrame {
         controller.selectImg();
     }//GEN-LAST:event_btnImgChooserActionPerformed
 
+    private void btnLimparCombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCombActionPerformed
+        controller.clearComb();
+    }//GEN-LAST:event_btnLimparCombActionPerformed
+
+    private void btnAlterarCombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarCombActionPerformed
+        controller.updateComb();
+    }//GEN-LAST:event_btnAlterarCombActionPerformed
+
+    private void btnRemoverCombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCombActionPerformed
+        controller.deleteComb();
+    }//GEN-LAST:event_btnRemoverCombActionPerformed
+
+    private void btnInserirCombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirCombActionPerformed
+        controller.addComb();
+    }//GEN-LAST:event_btnInserirCombActionPerformed
+
+    private void jtTabelaCombMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaCombMouseClicked
+        controller.selectComb();
+    }//GEN-LAST:event_jtTabelaCombMouseClicked
+
+    private void jtTabelaCombMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaCombMouseReleased
+        controller.selectComb();
+    }//GEN-LAST:event_jtTabelaCombMouseReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarComb;
     private javax.swing.JButton btnAlterarPosto;
@@ -486,6 +555,9 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JFormattedTextField jtBairro;
@@ -494,6 +566,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jtCnpj;
     private javax.swing.JFormattedTextField jtDataColeta;
     private javax.swing.JFormattedTextField jtEndereco;
+    private javax.swing.JFormattedTextField jtHistorico;
     private javax.swing.JFormattedTextField jtNomeFantasia;
     private javax.swing.JFormattedTextField jtPrecoVenda;
     private javax.swing.JFormattedTextField jtRazaoSocial;

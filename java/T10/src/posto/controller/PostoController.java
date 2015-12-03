@@ -36,22 +36,10 @@ public class PostoController {
             p.setBairro(view.getJtBairro().getText());
             p.setCep(view.getJtCep().getText());
             p.setImagem(view.getImgPosto().getText());
-            //p.setHistorico(view.get);
+            p.setHistorico(view.getJtHistorico().getText());
             return p;
         } catch (NumberFormatException | NullPointerException e) {
             view.showError("Dado(s) de entrada invalido(s)!");
-            return null;
-        }
-    }
-
-    private Combustivel constroiComb() {
-        try {
-            Combustivel c = new Combustivel();
-
-            //c.setTipo();
-            return c;
-        } catch (NumberFormatException | NullPointerException e) {
-            view.showError("Dado(s) de combustível invalido(s)!");
             return null;
         }
     }
@@ -91,6 +79,7 @@ public class PostoController {
         view.getJtEndereco().setText("");
         view.getJtBairro().setText("");
         view.getJtCep().setText("");
+        view.getJtHistorico().setText("");
         view.getJtTabelaPosto().clearSelection();
         view.getImgPosto().setIcon(null);
         view.getImgPosto().setText("");
@@ -114,7 +103,8 @@ public class PostoController {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
             //Posto
-            Posto p = view.getTabelaPosto().select(row);
+            //Posto p = view.getTabelaPosto().select(row);
+            Posto p = tabelaPosto.select(row);
             view.getJtCnpj().setText(p.getCnpj());
             view.getJtRazaoSocial().setText(p.getRazaoSocial());
             view.getJtNomeFantasia().setText(p.getNomeFantasia());
@@ -122,6 +112,7 @@ public class PostoController {
             view.getJtEndereco().setText(p.getEndereco());
             view.getJtBairro().setText(p.getBairro());
             view.getJtCep().setText(p.getCep());
+            view.getJtHistorico().setText(p.getHistorico());
 
             view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + p.getImagem())));
             view.getImgPosto().setText(p.getImagem());
@@ -132,12 +123,13 @@ public class PostoController {
             //Combustivel
             tabelaComb = new TableModelCombustivel(p.getHistorico());
             view.getJtTabelaComb().setModel(tabelaComb);
+            view.getBtnInserirComb().setEnabled(true);
+            view.getBtnLimparComb().setEnabled(true);
         }
     }
 
     public void selectImg() {
         view.getFc().showOpenDialog(view);
-        //view.getFc().
         File f = view.getFc().getSelectedFile();
         if (f != null) {
             String path = pathParser(f.getPath());
@@ -147,11 +139,72 @@ public class PostoController {
         }
     }
 
-    
-    
     private String pathParser(String path) {
         String pathR = path.replace("\\", "/");
         String[] split = pathR.split("/");
         return split[split.length - 1];
+    }
+
+    //Métodos relacionados a tabelaComb
+    private Combustivel constroiComb() {
+        try {
+            Combustivel c = new Combustivel();
+            c.setTipo(view.getJtTipoComb().getText());
+            c.setDataColeta(view.getJtTipoComb().getText());
+            c.setPrecoVenda(Float.parseFloat(view.getJtPrecoVenda().getText()));
+            return c;
+        } catch (NumberFormatException | NullPointerException e) {
+            view.showError("Dado(s) de combustível invalido(s)!");
+            return null;
+        }
+    }
+
+    public void addComb() {
+        Combustivel novo = constroiComb();
+        if (novo != null) {
+            tabelaComb.add(novo);
+            clearComb();
+        }
+    }
+    
+    public void updateComb(){
+        int row = view.getJtTabelaComb().getSelectedRow();
+        if (row >= 0) {
+            Combustivel c = constroiComb();
+            if (c != null) {
+                tabelaComb.update(row, c);
+            }
+        }
+    }
+    
+    public void deleteComb() {
+        int row = view.getJtTabelaComb().getSelectedRow();
+        if (row >= 0) {
+            tabelaComb.remove(row);
+            clearComb();
+        }
+    }
+    
+    public void clearComb(){
+        view.getJtTipoComb().setText("");
+        view.getJtDataColeta().setText("");
+        view.getJtPrecoVenda().setText("");
+        view.getBtnRemoverComb().setEnabled(false);
+        view.getBtnAlterarComb().setEnabled(false);
+    }
+    
+    public void selectComb() {
+        int row = view.getJtTabelaComb().getSelectedRow();
+        if (row >= 0) {
+            //Posto
+            //Combustivel c = view.getTabelaComb().select(row);
+            Combustivel c = tabelaComb.select(row);
+            view.getJtTipoComb().setText(c.getTipo());
+            view.getJtDataColeta().setText(c.getDataColeta());
+            view.getJtPrecoVenda().setText(c.getPrecoVenda() + "");
+
+            view.getBtnRemoverComb().setEnabled(true);
+            view.getBtnAlterarComb().setEnabled(true);
+        }
     }
 }
