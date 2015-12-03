@@ -150,7 +150,7 @@ public class PostoController {
         try {
             Combustivel c = new Combustivel();
             c.setTipo(view.getJtTipoComb().getText());
-            c.setDataColeta(view.getJtTipoComb().getText());
+            c.setDataColeta(view.getJtDataColeta().getText());
             c.setPrecoVenda(Float.parseFloat(view.getJtPrecoVenda().getText()));
             return c;
         } catch (NumberFormatException | NullPointerException e) {
@@ -191,6 +191,7 @@ public class PostoController {
         view.getJtPrecoVenda().setText("");
         view.getBtnRemoverComb().setEnabled(false);
         view.getBtnAlterarComb().setEnabled(false);
+        view.getJtTabelaComb().clearSelection();
     }
     
     public void selectComb() {
