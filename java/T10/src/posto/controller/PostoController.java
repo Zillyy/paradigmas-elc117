@@ -1,7 +1,6 @@
 package posto.controller;
 
 import java.io.File;
-import javax.swing.JFileChooser;
 import posto.model.Combustivel;
 import posto.model.TableModelCombustivel;
 import posto.model.Posto;
@@ -37,7 +36,7 @@ public class PostoController {
             p.setBairro(view.getJtBairro().getText());
             p.setCep(view.getJtCep().getText());
             p.setImagem(view.getImgPosto().getText());
-            //p.setHistorico();
+            //p.setHistorico(view.get);
             return p;
         } catch (NumberFormatException | NullPointerException e) {
             view.showError("Dado(s) de entrada invalido(s)!");
@@ -95,12 +94,20 @@ public class PostoController {
         view.getJtTabelaPosto().clearSelection();
         view.getImgPosto().setIcon(null);
         view.getImgPosto().setText("");
-        view.getBtnRemover().setEnabled(false);
-        view.getBtnAlterar().setEnabled(false);
+        view.getBtnRemoverPosto().setEnabled(false);
+        view.getBtnAlterarPosto().setEnabled(false);
 
         //Combustivel
         tabelaComb = new TableModelCombustivel();
         view.getJtTabelaComb().setModel(tabelaComb);
+        view.getJtTipoComb().setText("");
+        view.getJtDataColeta().setText("");
+        view.getJtPrecoVenda().setText("");
+        view.getBtnRemoverComb().setEnabled(false);
+        view.getBtnAlterarComb().setEnabled(false);
+        view.getBtnInserirComb().setEnabled(false);
+        view.getBtnLimparComb().setEnabled(false);
+
     }
 
     public void selectPosto() {
@@ -119,8 +126,8 @@ public class PostoController {
             view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + p.getImagem())));
             view.getImgPosto().setText(p.getImagem());
 
-            view.getBtnRemover().setEnabled(true);
-            view.getBtnAlterar().setEnabled(true);
+            view.getBtnRemoverPosto().setEnabled(true);
+            view.getBtnAlterarPosto().setEnabled(true);
 
             //Combustivel
             tabelaComb = new TableModelCombustivel(p.getHistorico());
@@ -129,16 +136,19 @@ public class PostoController {
     }
 
     public void selectImg() {
-        view.getFc().setFileSelectionMode(JFileChooser.FILES_ONLY);
         view.getFc().showOpenDialog(view);
+        //view.getFc().
         File f = view.getFc().getSelectedFile();
-        
-        String path = pathParser(f.getPath());
-        System.out.println(pathParser(f.getPath()));
-        view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + path)));
-        view.getImgPosto().setText(path);
+        if (f != null) {
+            String path = pathParser(f.getPath());
+            System.out.println(path);
+            view.getImgPosto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/file/img/" + path)));
+            view.getImgPosto().setText(path);
+        }
     }
 
+    
+    
     private String pathParser(String path) {
         String pathR = path.replace("\\", "/");
         String[] split = pathR.split("/");

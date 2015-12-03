@@ -33,6 +33,7 @@ public class PostoGUI extends javax.swing.JFrame {
         //jtTabelaPosto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
+    //Getters dos TextField
     public JFormattedTextField getJtBairro() {
         return jtBairro;
     }
@@ -61,23 +62,53 @@ public class PostoGUI extends javax.swing.JFrame {
         return jtRazaoSocial;
     }
 
+    public JFormattedTextField getJtDataColeta() {
+        return jtDataColeta;
+    }
+
+    public JFormattedTextField getJtPrecoVenda() {
+        return jtPrecoVenda;
+    }
+
+    public JFormattedTextField getJtTipoComb() {
+        return jtTipoComb;
+    }
+
+    //Getter do JLabel que mostra a imagem do posto
     public JLabel getImgPosto() {
         return imgPosto;
     }
 
-    public JButton getBtnAlterar() {
+    //Getters de botões 
+    public JButton getBtnAlterarPosto() {
         return btnAlterarPosto;
     }
 
-    public JButton getBtnRemover() {
+    public JButton getBtnRemoverPosto() {
         return btnRemoverPosto;
+    }
+
+    public JButton getBtnAlterarComb() {
+        return btnAlterarComb;
+    }
+
+    public JButton getBtnRemoverComb() {
+        return btnRemoverComb;
+    }
+
+    public JButton getBtnInserirComb() {
+        return btnInserirComb;
+    }
+
+    public JButton getBtnLimparComb() {
+        return btnLimparComb;
     }
 
     //Getters para a tabela dos Postos
     public TableModelPosto getTabelaPosto() {
         return tabelaPosto;
     }
-    
+
     public JTable getJtTabelaPosto() {
         return jtTabelaPosto;
     }
@@ -94,7 +125,7 @@ public class PostoGUI extends javax.swing.JFrame {
     public JFileChooser getFc() {
         return fc;
     }
-    
+
     //Cria Option Pane com mensagem de erro
     public void showError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
@@ -109,6 +140,7 @@ public class PostoGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fc = new javax.swing.JFileChooser();
         jLabel8 = new javax.swing.JLabel();
         btnLimparPosto = new javax.swing.JButton();
         btnRemoverPosto = new javax.swing.JButton();
@@ -140,6 +172,14 @@ public class PostoGUI extends javax.swing.JFrame {
         jtBandeira = new javax.swing.JFormattedTextField();
         jtEndereco = new javax.swing.JFormattedTextField();
         jtBairro = new javax.swing.JFormattedTextField();
+        jtTipoComb = new javax.swing.JFormattedTextField();
+        jtDataColeta = new javax.swing.JFormattedTextField();
+        jtPrecoVenda = new javax.swing.JFormattedTextField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
+
+        fc.setCurrentDirectory(new java.io.File("D:\\Google Drive\\facul\\semestre_03\\github\\paradigmas-elc117\\java\\T10\\src\\file\\img"));
+        fc.setFileFilter(new ImgPostoFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -214,12 +254,16 @@ public class PostoGUI extends javax.swing.JFrame {
         });
 
         btnLimparComb.setText("Limpar");
+        btnLimparComb.setEnabled(false);
 
         btnAlterarComb.setText("Alterar");
+        btnAlterarComb.setEnabled(false);
 
         btnRemoverComb.setText("Remover");
+        btnRemoverComb.setEnabled(false);
 
         btnInserirComb.setText("Inserir");
+        btnInserirComb.setEnabled(false);
 
         jLabel2.setText("Tipo de Combustível");
 
@@ -238,6 +282,10 @@ public class PostoGUI extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        jFormattedTextField1.setText("jFormattedTextField1");
+
+        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,44 +328,66 @@ public class PostoGUI extends javax.swing.JFrame {
                         .addGap(116, 116, 116)
                         .addComponent(imgPosto, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtTipoComb)
+                            .addComponent(jtDataColeta)
+                            .addComponent(jtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
                         .addComponent(btnLimparComb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAlterarComb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverComb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnInserirComb)
-                        .addGap(66, 66, 66))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel10)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnInserirComb)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jtTipoComb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jtDataColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLimparComb)
                             .addComponent(btnAlterarComb)
                             .addComponent(btnRemoverComb)
-                            .addComponent(btnInserirComb)))
+                            .addComponent(btnInserirComb))
+                        .addGap(84, 84, 84)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -389,7 +459,6 @@ public class PostoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jtTabelaPostoMouseClicked
 
     private void btnImgChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgChooserActionPerformed
-        fc = new JFileChooser();
         controller.selectImg();
     }//GEN-LAST:event_btnImgChooserActionPerformed
 
@@ -403,7 +472,10 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnLimparPosto;
     private javax.swing.JButton btnRemoverComb;
     private javax.swing.JButton btnRemoverPosto;
+    private javax.swing.JFileChooser fc;
     private javax.swing.JLabel imgPosto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -420,11 +492,13 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jtBandeira;
     private javax.swing.JFormattedTextField jtCep;
     private javax.swing.JFormattedTextField jtCnpj;
+    private javax.swing.JFormattedTextField jtDataColeta;
     private javax.swing.JFormattedTextField jtEndereco;
     private javax.swing.JFormattedTextField jtNomeFantasia;
+    private javax.swing.JFormattedTextField jtPrecoVenda;
     private javax.swing.JFormattedTextField jtRazaoSocial;
     private javax.swing.JTable jtTabelaComb;
     private javax.swing.JTable jtTabelaPosto;
+    private javax.swing.JFormattedTextField jtTipoComb;
     // End of variables declaration//GEN-END:variables
-    private JFileChooser fc;
 }
