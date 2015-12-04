@@ -9,6 +9,8 @@ import posto.model.Posto;
 import posto.model.TableModelPosto;
 import posto.view.PostoGUI;
 import file.dao.PostoDao;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 /**
  * @author Zilly
@@ -17,6 +19,7 @@ public class PostoController {
 
     private PostoGUI view;
     private TableModelPosto tabelaPosto;
+    private ArrayList<Posto> listPostoAux;
     private TableModelCombustivel tabelaComb;
 
     //Construtor do Controller
@@ -240,21 +243,8 @@ public class PostoController {
     //Pesquisa por bairro
     public void pesquisa() {
         clearPosto();
-        ArrayList<Posto> listPronta = new ArrayList<>();
-        for (Posto posto : tabelaPosto.getPostos()) {
-            if (posto.getBairro().toLowerCase().contains(view.getJtPesquisa().getText().toLowerCase())) {
-                listPronta.add(posto);
-            }
-        }
-        tabelaPosto = new TableModelPosto(listPronta);
-        view.getJtTabelaPosto().setModel(tabelaPosto);
-    }
-
-    //Recarrega a tabelaPosto com dados do arquivo
-    public void resetaPesquisa() {
-        clearPosto();
-        view.getJtPesquisa().setText("");
-        tabelaPosto = new TableModelPosto();
-        view.getJtTabelaPosto().setModel(tabelaPosto);
+        TableRowSorter<TableModelPosto> sorter = new TableRowSorter<>(tabelaPosto);
+        view.getJtTabelaPosto().setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(view.getJtPesquisa().getText(),5));
     }
 }

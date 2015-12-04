@@ -177,9 +177,8 @@ public class PostoGUI extends javax.swing.JFrame {
         jtDataColeta = new javax.swing.JFormattedTextField();
         jtPrecoVenda = new javax.swing.JFormattedTextField();
         jtPesquisa = new javax.swing.JFormattedTextField();
-        btnPesquisar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        btnResetPesquisa = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuBar = new javax.swing.JMenu();
         btnSalvarArq = new javax.swing.JMenuItem();
@@ -326,21 +325,15 @@ public class PostoGUI extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        btnPesquisar.setText("Pesquisar por bairro");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
+        jtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtPesquisaKeyReleased(evt);
             }
         });
 
         jLabel11.setText("Nome do Arquivo do Histórico");
 
-        btnResetPesquisa.setText("Reset");
-        btnResetPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetPesquisaActionPerformed(evt);
-            }
-        });
+        jLabel12.setText("Pesquisa por Bairro");
 
         jMenuBar.setText("File");
 
@@ -449,12 +442,10 @@ public class PostoGUI extends javax.swing.JFrame {
                                 .addComponent(btnInserirComb)
                                 .addGap(66, 66, 66))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnResetPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -482,13 +473,11 @@ public class PostoGUI extends javax.swing.JFrame {
                             .addComponent(btnAlterarComb)
                             .addComponent(btnRemoverComb)
                             .addComponent(btnInserirComb))
-                        .addGap(62, 62, 62)
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPesquisar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnResetPesquisa)
-                        .addGap(4, 4, 4))
+                            .addComponent(jLabel12))
+                        .addGap(42, 42, 42))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -598,13 +587,9 @@ public class PostoGUI extends javax.swing.JFrame {
         controller.salvarArq();
     }//GEN-LAST:event_btnSalvarArqActionPerformed
 
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+    private void jtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPesquisaKeyReleased
         controller.pesquisa();
-    }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void btnResetPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetPesquisaActionPerformed
-        controller.resetaPesquisa();
-    }//GEN-LAST:event_btnResetPesquisaActionPerformed
+    }//GEN-LAST:event_jtPesquisaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarComb;
@@ -614,10 +599,8 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnInserirPosto;
     private javax.swing.JButton btnLimparComb;
     private javax.swing.JButton btnLimparPosto;
-    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemoverComb;
     private javax.swing.JButton btnRemoverPosto;
-    private javax.swing.JButton btnResetPesquisa;
     private javax.swing.JMenuItem btnSair;
     private javax.swing.JMenuItem btnSalvarArq;
     private javax.swing.JFileChooser fc;
@@ -625,6 +608,7 @@ public class PostoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
