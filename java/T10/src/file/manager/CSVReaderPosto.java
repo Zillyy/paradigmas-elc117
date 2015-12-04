@@ -38,15 +38,11 @@ public class CSVReaderPosto {
             while ((line = fileReader.readLine()) != null) {
                 String[] tokens = line.split(COMMA_DELIMITER);
                 if (tokens.length > 0) {
-                    Posto p = new Posto (tokens[POSTO_CNPJ], tokens[POSTO_RAZAO_SOCIAL], tokens[POSTO_NOME_FANTASIA], tokens[POSTO_BANDEIRA], tokens[POSTO_ENDERECO], tokens[POSTO_BAIRRO], 
+                    Posto p = new Posto(tokens[POSTO_CNPJ], tokens[POSTO_RAZAO_SOCIAL], tokens[POSTO_NOME_FANTASIA], tokens[POSTO_BANDEIRA], tokens[POSTO_ENDERECO], tokens[POSTO_BAIRRO],
                             tokens[POSTO_CEP], tokens[POSTO_IMAGEM], tokens[POSTO_HISTORICO]);
                     listPostos.add(p);
                 }
             }
-
-//            for (Posto comb : listPostos) {
-//                System.out.println(comb);
-//            }
 
         } catch (IOException e) {
             System.out.println("Arquivo não existe!");

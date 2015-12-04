@@ -19,7 +19,7 @@ public class TableModelCombustivel extends AbstractTableModel {
         combs = new ArrayList<>();
     }
     
-    //Construtor alternativo 1
+    //Construtor alternativo
     public TableModelCombustivel(ArrayList<Combustivel> listCombs){
         this.combs = listCombs;
     }

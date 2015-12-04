@@ -17,7 +17,12 @@ public class TableModelPosto extends AbstractTableModel {
 
     //Construtor Padrão
     public TableModelPosto() {
-        postos = PostoDao.getArrayCombs("postos.csv");
+        postos = PostoDao.getArrayPostos("postos.csv");
+    }
+    
+    //Construtor Alternativo - usado na pesquisa
+    public TableModelPosto(ArrayList<Posto> listPostos) {
+        postos = listPostos;
     }
 
     //Getter do ArrayList de Postos

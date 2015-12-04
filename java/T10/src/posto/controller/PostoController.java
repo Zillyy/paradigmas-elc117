@@ -1,7 +1,6 @@
 package posto.controller;
 
 import file.dao.CombustivelDao;
-import file.dao.PostoDao;
 import java.io.File;
 import java.util.ArrayList;
 import posto.model.Combustivel;
@@ -20,6 +19,7 @@ public class PostoController {
     private TableModelPosto tabelaPosto;
     private TableModelCombustivel tabelaComb;
 
+    //Construtor do Controller
     public PostoController(PostoGUI view, TableModelPosto tabelaPosto, TableModelCombustivel tabelaComb) {
         this.view = view;
         this.tabelaPosto = tabelaPosto;
@@ -29,6 +29,8 @@ public class PostoController {
         view.setResizable(false); // Fixa o tamanho da janela.
     }
 
+    //-------------------------Métodos relacionados ao Posto
+    //Constrói um novo Posto
     private Posto constroiPosto() {
         try {
             Posto p = new Posto();
@@ -49,6 +51,7 @@ public class PostoController {
         }
     }
 
+    //Adiciona um novo Posto
     public void addPosto() {
         Posto novo = constroiPosto();
         if (novo != null) {
@@ -57,6 +60,7 @@ public class PostoController {
         }
     }
 
+    //Atualiza um Posto
     public void updatePosto() {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
@@ -67,6 +71,7 @@ public class PostoController {
         }
     }
 
+    //Deleta um Posto
     public void deletePosto() {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
@@ -75,6 +80,7 @@ public class PostoController {
         }
     }
 
+    //Limpa todos os TextFields do Posto e do Combustível
     public void clearPosto() {
         //Posto
         view.getJtCnpj().setText("");
@@ -104,6 +110,7 @@ public class PostoController {
 
     }
 
+    //Seleciona um Posto
     public void selectPosto() {
         int row = view.getJtTabelaPosto().getSelectedRow();
         if (row >= 0) {
@@ -135,6 +142,7 @@ public class PostoController {
         }
     }
 
+    //Abre o FileChooser para seleção da imagem
     public void selectImg() {
         view.getFc().showOpenDialog(view);
         File f = view.getFc().getSelectedFile();
@@ -152,7 +160,8 @@ public class PostoController {
         return split[split.length - 1];
     }
 
-    //Métodos relacionados a tabelaComb
+    //-------------------Métodos relacionados aos Combustíveis
+    //Constrói um novo Combustível
     private Combustivel constroiComb() {
         try {
             Combustivel c = new Combustivel();
@@ -166,6 +175,7 @@ public class PostoController {
         }
     }
 
+    //Adiciona um novo Combustível
     public void addComb() {
         Combustivel novo = constroiComb();
         if (novo != null) {
@@ -174,6 +184,7 @@ public class PostoController {
         }
     }
 
+    //Atualiza um Combustível
     public void updateComb() {
         int row = view.getJtTabelaComb().getSelectedRow();
         if (row >= 0) {
@@ -184,6 +195,7 @@ public class PostoController {
         }
     }
 
+    //Deleta um Combustível
     public void deleteComb() {
         int row = view.getJtTabelaComb().getSelectedRow();
         if (row >= 0) {
@@ -192,6 +204,7 @@ public class PostoController {
         }
     }
 
+    //Reseta os TextFields dos Combustíveis
     public void clearComb() {
         view.getJtTipoComb().setText("");
         view.getJtDataColeta().setText("");
@@ -201,6 +214,7 @@ public class PostoController {
         view.getJtTabelaComb().clearSelection();
     }
 
+    //Seleção do Combustível
     public void selectComb() {
         int row = view.getJtTabelaComb().getSelectedRow();
         if (row >= 0) {
@@ -215,10 +229,32 @@ public class PostoController {
         }
     }
 
+    //Método para salvar arquivos - o de postos por padrão fica com nome "postos.csv" - os históricos podem ser alterados
     public void salvarArq() {
         PostoDao.salvarPostos("postos.csv", tabelaPosto.getPostos());
         for (Posto posto : tabelaPosto.getPostos()) {
             CombustivelDao.salvarCombustiveis(posto.getHistorico(), posto.getCombustiveis());
         }
+    }
+
+    //Pesquisa por bairro
+    public void pesquisa() {
+        clearPosto();
+        ArrayList<Posto> listPronta = new ArrayList<>();
+        for (Posto posto : tabelaPosto.getPostos()) {
+            if (posto.getBairro().toLowerCase().contains(view.getJtPesquisa().getText().toLowerCase())) {
+                listPronta.add(posto);
+            }
+        }
+        tabelaPosto = new TableModelPosto(listPronta);
+        view.getJtTabelaPosto().setModel(tabelaPosto);
+    }
+
+    //Recarrega a tabelaPosto com dados do arquivo
+    public void resetaPesquisa() {
+        clearPosto();
+        view.getJtPesquisa().setText("");
+        tabelaPosto = new TableModelPosto();
+        view.getJtTabelaPosto().setModel(tabelaPosto);
     }
 }

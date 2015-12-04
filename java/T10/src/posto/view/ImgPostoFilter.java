@@ -6,6 +6,8 @@ import java.io.File;
  *
  * @author Zilly
  */
+
+//Filtro do FileChooser de imagens
 public class ImgPostoFilter extends javax.swing.filechooser.FileFilter {
 
     @Override
