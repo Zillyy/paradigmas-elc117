@@ -19,7 +19,6 @@ public class PostoController {
 
     private PostoGUI view;
     private TableModelPosto tabelaPosto;
-    private ArrayList<Posto> listPostoAux;
     private TableModelCombustivel tabelaComb;
 
     //Construtor do Controller
